@@ -1,0 +1,34 @@
+group 'com.chargebee'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'war'
+
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "gradle.plugin.org.akhikhl.gretty:gretty:2.0.0"
+    }
+}
+dependencies {
+    providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
+    compile group: 'com.chargebee', name: 'chargebee-java', version: '2.4.9'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+apply plugin: "org.akhikhl.gretty"
+
+gretty {
+    httpPort = 8000
+}

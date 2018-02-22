@@ -1,0 +1,8 @@
+api/back-end/java/simple_servlet/build
+api/back-end/java/simple_servlet/.gradle
+api/back-end/java/simple_servlet/.idea
+api/back-end/javascript/express/node_modules
+api/back-end/php/laravel/vendor
+api/back-end/python/flask/env
+api/front-end/angular/node_modules
+api/front-end/react-app/node_modules
