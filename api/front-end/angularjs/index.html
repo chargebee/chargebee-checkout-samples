@@ -1,0 +1,23 @@
+<!doctype html>
+<html ng-app="chargebeeDemo">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://js.chargebee.com/v2/chargebee.js"></script>
+    <script src="cb-utils.js"></script>
+    <style>
+      #header a {
+        text-decoration: underline;
+        font-size: 20px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div ng-controller="chargebeeController">
+        <div style="text-align:center" id="header">
+          <a ng-click="openCheckout($event)">Subscribe</a>
+          <a ng-click="openPortal($event)">Manage Account</a>
+        </div>
+    </div>
+  </body>
+</html>
