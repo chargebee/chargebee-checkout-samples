@@ -16,7 +16,10 @@ def hello_world():
 def generate_checkout_new_url():
   result = chargebee.HostedPage.checkout_new({
     "subscription" : {
-        "plan_id" : request.form.get("plan_id")
+      "plan_id" : request.form.get("plan_id")
+    },
+    "customer" : {
+      "id" : "cbdemo_sir"
     }
   })
   hosted_page = result._response['hosted_page']

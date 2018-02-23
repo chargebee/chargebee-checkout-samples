@@ -12,24 +12,24 @@
       
     </div>
     <script>
-      $(document).on("ready", function() {
-        this.cbInstance = window.Chargebee.init({site: "vivek1-test"});
+      $(document).ready(function() {
+        var cbInstance = window.Chargebee.init({site: "vivek1-test"});
 
-        this.cbInstance.setPortalSession(() => {
+        cbInstance.setPortalSession(() => {
           // we have used axios for performing http requests
           // Hit your end point that returns portal session object as response
           // This sample end point will call the below api
           // https://apidocs.chargebee.com/docs/api/portal_sessions#create_a_portal_session
           return $.ajax({
-            method: "POST",
-            url: "/api/create_portal_session"
+            method: "post",
+            url: "http://localhost:8000/api/generate_portal_session"
           });
         });
 
         $("#cb-checkout").on("click", function(event) {
           event.preventDefault();
           event.stopPropagation();
-          this.cbInstance.openCheckout({
+          cbInstance.openCheckout({
               hostedPage: function() {
                 // Hit your end point that returns hosted page object as response
                 // This sample end point will call the below api
@@ -40,9 +40,11 @@
                 // If you want to use paypal, go cardless and plaid, pass embed parameter as false
 
                 return $.ajax({
-                  method: "POST",
-                  url: "/api/generate_hp_url",
-                  data: data
+                  method: "post",
+                  url: "http://localhost:8000/api/generate_checkout_new_url",
+                  data: {
+                    plan_id: "cbdemo_scale"
+                  }
                 });
               },
               loaded: function() {
@@ -68,7 +70,7 @@
         $("#cb-portal").on("click", function(event) {
           event.stopPropagation();
           event.preventDefault();
-          this.cbInstance.createChargebeePortal().open({
+          cbInstance.createChargebeePortal().open({
             loaded: function() {
 
             },

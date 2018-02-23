@@ -5,6 +5,7 @@ class ChargebeeController < ApplicationController
   def checkout_new
     result = ChargeBee::HostedPage.checkout_new({
       :subscription => {:plan_id => params[:plan_id] },
+      :customer => {:id => "cbdemo_sir" },
       :embed => false
     })
     render :json => result.hosted_page.to_s

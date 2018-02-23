@@ -38,6 +38,7 @@ export class AppComponent {
   }
 
   openCheckout() {
+    this.cbInstance.logout();
     this.cbInstance.openCheckout({
       hostedPage: () => {
         // Hit your end point that returns hosted page object as response

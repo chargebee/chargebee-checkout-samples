@@ -14,7 +14,10 @@ app.post("/api/generate_checkout_new_url", (req, res) => {
   chargebee.hosted_page.checkout_new({
     subscription : {
       plan_id : req.body.plan_id
-    }, 
+    },
+    customer: {
+      id: "cbdemo_sir"
+    }
   }).request(function(error,result){
     if(error){
       //handle error

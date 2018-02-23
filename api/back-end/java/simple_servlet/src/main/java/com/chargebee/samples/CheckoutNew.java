@@ -15,9 +15,11 @@ public class CheckoutNew extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
         String planId = request.getParameter("plan_id");
+        String customerId = "cbdemo_sir";
         Result result = null;
         try {
             result = HostedPage.checkoutNew()
+                    .customerId(customerId)
                     .subscriptionPlanId(planId).request(new Environment("vivek1-test", "test_0kMishobocuobez4OlrbwultwfHfT51fE"));
         } catch (Exception e) {
             e.printStackTrace();

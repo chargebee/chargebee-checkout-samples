@@ -13,6 +13,9 @@ class ChargebeeController extends Controller
         $result = ChargeBee_HostedPage::checkoutNew(array(
             "subscription" => array(
               "planId" => $request->get('plan_id')
+            ),
+            "customer" => array(
+                "id" => "cbdemo_sir"
             )
         ));
         $hostedPage = $result->hostedPage();
