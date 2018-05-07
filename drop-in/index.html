@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="icon" type="image/png" href="/assets/images/favicon.png" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Honey Comics</title>
+<!-- adding bootstrap.css and the needed styling -->
+<link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+<link href="/assets/css/style.css" rel="stylesheet">
+<!-- adding HTML5.js -->
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+<script src="https://js.chargebee.com/v2/chargebee.js" data-cb-site="honeycomics-v3-test" ></script>
+</head>
+<body>
+<div class="navbar navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">          
+      <div class="h1"></div>
+    </div>
+  </div>
+</div>
+<div class="jumbotron">
+    <div class="container text-center">
+        <h2><span class="text-muted">Subscribe with a fake card and a fake address, We'll deliver our fake</span> comics <span class="text-muted">On Time!</span></h2>
+    	<h3 class="text-muted">We are working on something new, fresh and social to help you catalog<br> and manage your amazing comic collection.</h3>
+    </div>    
+</div>
+<div class="jumbotron comic-book text-center">
+	<img src="/assets/images/comic-book.png" alt="comic book" class="center-block img-responsive">
+
+    <a href="javascript:void(0)" class="btn btn-success btn-lg" data-cb-type="checkout" data-cb-plan-id="comics-box" >subscribe</a>
+    
+</div>
+<div class="jumbotron text-center">
+    <h1>Only $6/Month</h1>
+    <h4 class="text-muted">Free Shipping and No hidden charges</h4><br>
+    <h4 class="h3"><span class="text-muted">The comics you love. Unlimited access. One convenient subscription.</span></h4> 
+</div>
+<div class="footer text-center">
+	<span class="text-muted">&copy; Honey Comics. All Rights Reserved.</span>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var cbInstance = Chargebee.getInstance();
+
+      // To add addons
+      // Get the element with the corresponding plan and addons
+      var planElement = document.querySelector("[data-cb-plan-id='comics-box']");
+      var product = cbInstance.getProduct(planElement);
+      product.addons.push({id: "extra-comic-book", quantity: 2});
+
+      // to add coupon
+      product.addCoupon("cbdemo_earlybird");
+
+      // adding subscription custom fields
+      product.data["cf_sub_test"] = "subscription custom field";
+
+      // To add coupons and customer related information with custom fields
+      var cart = cbInstance.getCart();
+      // Date should be in YYYY-MM-DD
+      cart.setCustomer({email: "vivek@chargebee.com", cf_test: "customer custom field", cf_date: "1991-09-16"});
+
+      cbInstance.setCheckoutCallbacks(function(cart) {
+        // You can get the plan name for which the checkout happened like below
+        var product = cart.products[0];
+        console.log(product.planId);
+        console.log(product.addons);
+        return {
+            loaded: function() {
+                console.log("checkout opened");
+            },
+            close: function() {
+                console.log("checkout closed");
+            },
+            success: function(hostedPageId) {
+              console.log(hostedPageId);
+              // Hosted page id will be unique token for the checkout that happened
+              // You can pass this hosted page id to your backend 
+              // and then call our retrieve hosted page api to get subscription details
+              // https://apidocs.chargebee.com/docs/api/hosted_pages#retrieve_a_hosted_page
+            },
+            step: function(value) {
+                // value -> which step in checkout
+                console.log(value);
+            }
+        }
+      });
+    });
+</script>
+</body>
+</html>
