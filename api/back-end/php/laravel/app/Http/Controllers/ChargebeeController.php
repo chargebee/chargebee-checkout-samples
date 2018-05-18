@@ -15,7 +15,11 @@ class ChargebeeController extends Controller
               "planId" => $request->get('plan_id')
             ),
             "customer" => array(
-                "id" => "cbdemo_sir"
+                "first_name" => $request->get('first_name'),
+                "last_name" => $request->get('last_name'),
+                "company" => $request->get('company'),
+                "phone" => $request->get('phone'),
+                "email" => $request->get('email')
             )
         ));
         $hostedPage = $result->hostedPage();

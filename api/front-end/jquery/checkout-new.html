@@ -1,0 +1,100 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- adding bootstrap.css and the needed styling -->
+    <title>Honey Comics</title>
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://js.chargebee.com/v2/chargebee.js"></script>
+    <script src="./assets/js/app.js"></script>
+  </head>
+<body>
+  <div class="navbar navbar-static-top">
+      <div class="container">
+          <div class="navbar-header">          
+              <div class="h1"></div>
+          </div>
+      </div>
+  </div>
+  <div id="container" class="checkout container">
+      <div id="customer-info" class="row">                
+          <div class="col-sm-7" id="checkout_info">   
+              <form id="subscribe-form">
+                  <div class="page-header">
+                      <h3>Tell us about yourself</h3>
+                  </div>
+                  <div class="row">
+                      <div class="col-sm-6"> 
+                          <div class="form-group">
+                              <label for="first_name">First Name</label>
+                              <input type="text" class="form-control" name="first_name">
+                          </div>
+                      </div>
+                      <div class="col-sm-6">
+                          <div class="form-group">
+                              <label for="last_name">Last Name</label>
+                              <input type="text" class="form-control" name="last_name">
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-sm-6">
+                          <div class="form-group">
+                              <label for="email]">Email</label>
+                              <input type="text" class="form-control" name="email">
+                          </div>
+                      </div> 
+                                                  
+                      <div class="col-sm-6">
+                          <div class="form-group">
+                              <label for="phone">Phone</label>
+                              <input type="text" class="form-control" name="phone">
+                          </div>
+                      </div>                   
+                  </div> 
+                  <div class="row">
+                      <div class="col-sm-6">
+                          <div class="form-group">
+                              <label for="company">Company</label>
+                              <input type="text" class="form-control" name="company">
+                          </div>
+                      </div>
+                  </div>                        
+                  <hr>
+                  <input type="hidden" name="plan_id" value="cbdemo_scale" />                         
+                  <p class="text-danger" id="errorContainer" style="display:none">There were errors while submitting</p>
+                  <div class="form-inline">
+                      <div class="form-group">
+                        <input type="submit" class="submit-btn btn btn-success btn-lg" value="Proceed to Payment">
+                      </div>
+                      <div class="form-group">
+                        <span id="loader" class="subscribe-process process" style="display:none">Processing&hellip;</span>
+                      </div>
+                  </div>                        
+                </form>
+          </div>
+          <div class="col-sm-4 cb-order-list col-sm-offset-1">
+              <div class="page-header">
+                  <h3>Subscription Details</h3>
+              </div>
+              <div class="media">                    	
+                  <img src="/assets/images/plan.png" alt="chargebee demo" class="pull-left">
+                  <div class="media-body">
+                    <p class="h4">Marvel Classics</p>
+                      <p class="h4">$9 <small><em>per month</em></small></p>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div id="checkout-info" class="row">
+
+      </div>
+  </div>
+  <br><br>
+  <div class="footer text-center">
+      <span class="text-muted">&copy; Honey Comics. All Rights Reserved.</span>
+  </div>
+  </body>
+</html>

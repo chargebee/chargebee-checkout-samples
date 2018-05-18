@@ -19,7 +19,11 @@ def generate_checkout_new_url():
       "plan_id" : request.form.get("plan_id")
     },
     "customer" : {
-      "id" : "cbdemo_sir"
+      "first_name" : request.form.get("first_name"),
+      "last_name" : request.form.get("last_name"),
+      "company" : request.form.get("company"),
+      "phone" : request.form.get("phone"),
+      "email" : request.form.get("email")
     }
   })
   hosted_page = result._response['hosted_page']

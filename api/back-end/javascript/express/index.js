@@ -16,7 +16,11 @@ app.post("/api/generate_checkout_new_url", (req, res) => {
       plan_id : req.body.plan_id
     },
     customer: {
-      id: "cbdemo_sir"
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
+      email: req.body.email,
+      phone: req.body.phone,
+      company: req.body.company,
     }
   }).request(function(error,result){
     if(error){

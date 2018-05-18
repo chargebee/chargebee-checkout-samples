@@ -1,0 +1,73 @@
+<div id="container" class="checkout container">
+    <div id="customer-info" class="row">                
+        <div class="col-sm-7" id="checkout_info">   
+            <div id="subscribe-form">
+                <div class="page-header">
+                    <h3>Tell us about yourself</h3>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6"> 
+                        <div class="form-group">
+                            <label for="first_name">First Name</label>
+                            <input type="text" class="form-control" [(ngModel)]="first_name">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="last_name">Last Name</label>
+                            <input type="text" class="form-control" [(ngModel)]="last_name">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="email]">Email</label>
+                            <input type="text" class="form-control" [(ngModel)]="email">
+                        </div>
+                    </div> 
+                                                
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="text" class="form-control" [(ngModel)]="phone">
+                        </div>
+                    </div>                   
+                </div> 
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="company">Company</label>
+                            <input type="text" class="form-control" [(ngModel)]="company">
+                        </div>
+                    </div>
+                </div>                        
+                <hr>                            
+                <p class="text-danger" *ngIf="errorMsg">There were errors while submitting</p>
+                <div class="form-inline">
+                    <div class="form-group">
+                      <input type="submit" (click)="openCheckout()" class="submit-btn btn btn-success btn-lg" value="Proceed to Payment">
+                    </div>
+                    <div class="form-group">
+                      <span ref="loader" class="subscribe-process process" *ngIf="loading">Processing&hellip;</span>
+                    </div>
+                </div>                        
+              </div>
+        </div>
+        <div class="col-sm-4 cb-order-list col-sm-offset-1">
+            <div class="page-header">
+                <h3>Subscription Details</h3>
+            </div>
+            <div class="media">                    	
+                <img src="/assets/images/plan.png" alt="chargebee demo" class="pull-left">
+                <div class="media-body">
+                  <p class="h4">Marvel Classics</p>
+                    <p class="h4">$9 <small><em>per month</em></small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="checkout-info" class="row">
+
+    </div>
+</div>

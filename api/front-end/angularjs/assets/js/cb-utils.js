@@ -1,22 +1,24 @@
 angular.module('chargebeeDemo', [])
   .controller('chargebeeController', function($scope, $http) {
-    var cbInstance = Chargebee.init({site: "vivek1-test"});
-    cbInstance.setPortalSession(() => {
-      // Hit your end point that returns portal session object as response
-      // This sample end point will call the below api
-      // https://apidocs.chargebee.com/docs/api/portal_sessions#create_a_portal_session
-      return $http.post("http://localhost:8000/api/generate_portal_session", getFormUrlEncoded({}),
-      {headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).then(function(response) {
-        return response.data;
-      });
-    });
+    var cbInstance = Chargebee.init({site: "honeycomics-v3-test"});
+    // cbInstance.setPortalSession(() => {
+    //   // Hit your end point that returns portal session object as response
+    //   // This sample end point will call the below api
+    //   // https://apidocs.chargebee.com/docs/api/portal_sessions#create_a_portal_session
+    //   return $http.post("http://localhost:8000/api/generate_portal_session", getFormUrlEncoded({}),
+    //   {headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).then(function(response) {
+    //     return response.data;
+    //   });
+    // });
 
     var getFormUrlEncoded = function(toConvert) {
       const formBody = [];
       for (const property in toConvert) {
         const encodedKey = encodeURIComponent(property);
-        const encodedValue = encodeURIComponent(toConvert[property]);
-        formBody.push(encodedKey + '=' + encodedValue);
+        if(toConvert[property]) {
+          const encodedValue = encodeURIComponent(toConvert[property]);
+          formBody.push(encodedKey + '=' + encodedValue); 
+        }
       }
       return formBody.join('&');
     }
@@ -24,6 +26,8 @@ angular.module('chargebeeDemo', [])
     $scope.openCheckout = function() {
       cbInstance.openCheckout({
         hostedPage: function(){
+          $scope.loading = true;
+          $scope.errorMsg = false;
           // Hit your end point that returns hosted page object as response
           // This sample end point will call the below api
           // You can pass hosted page object created as a result of checkout_new, checkout_existing, manage_payment_sources
@@ -31,7 +35,15 @@ angular.module('chargebeeDemo', [])
           // https://apidocs.chargebee.com/docs/api/hosted_pages#checkout_existing_subscription
           // https://apidocs.chargebee.com/docs/api/hosted_pages#manage_payment_sources
           // If you want to use paypal, go cardless and plaid, pass embed parameter as false
-          return $http.post("http://localhost:8000/api/generate_checkout_new_url", getFormUrlEncoded({plan_id: 'cbdemo_scale'}), {headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).then(function(response) {
+          var data = {
+            plan_id: 'cbdemo_scale',
+            first_name: $scope.first_name,
+            last_name: $scope.last_name,
+            email: $scope.email,
+            company: $scope.company,
+            phone: $scope.phone
+          };
+          return $http.post("http://localhost:8000/api/generate_checkout_new_url", getFormUrlEncoded(data), {headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).then(function(response) {
             return response.data;
           });
         },
@@ -39,7 +51,13 @@ angular.module('chargebeeDemo', [])
           console.log("checkout opened");
         },
         close: function() {
-            console.log("checkout closed");
+          $scope.loading = false;
+          $scope.$digest();
+          console.log("checkout closed");
+        },
+        error: function() {
+          $scope.errorMsg = true;
+          $scope.$apply();
         },
         success: function(hostedPageId){
           console.log(hostedPageId);
