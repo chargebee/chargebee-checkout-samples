@@ -6,7 +6,7 @@ import chargebee
 app = Flask(__name__)
 CORS(app)
 
-chargebee.configure("test_0kMishobocuobez4OlrbwultwfHfT51fE", "vivek1-test")
+chargebee.configure("test_jqXGuQLkBHUSR2PM0qgUV21W1VqSFJIU", "honeycomics-v3-test")
 
 @app.route('/')
 def hello_world():

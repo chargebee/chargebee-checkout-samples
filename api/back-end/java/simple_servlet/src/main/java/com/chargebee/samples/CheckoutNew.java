@@ -18,7 +18,7 @@ public class CheckoutNew extends HttpServlet {
         Result result = null;
         try {
             result = HostedPage.checkoutNew()
-                    .subscriptionPlanId(planId).request(new Environment("vivek1-test", "test_0kMishobocuobez4OlrbwultwfHfT51fE"));
+                    .subscriptionPlanId(planId).request(new Environment("honeycomics-v3-test", "test_jqXGuQLkBHUSR2PM0qgUV21W1VqSFJIU"));
         } catch (Exception e) {
             e.printStackTrace();
         }

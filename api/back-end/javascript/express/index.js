@@ -3,8 +3,8 @@ const chargebee = require("chargebee")
 // CORS is enabled only for demo. Please dont use this in production unless you know about CORS
 const cors = require('cors')
 
-chargebee.configure({site : "vivek1-test", 
-  api_key : "test_0kMishobocuobez4OlrbwultwfHfT51fE"});
+chargebee.configure({site : "honeycomics-v3-test", 
+  api_key : "test_jqXGuQLkBHUSR2PM0qgUV21W1VqSFJIU"});
 const app = express()
 
 app.use(express.urlencoded())
