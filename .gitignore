@@ -6,3 +6,5 @@ api/back-end/php/laravel/vendor
 api/back-end/python/flask/env
 api/front-end/angular/node_modules
 api/front-end/react-app/node_modules
+node_modules/
+dist/

@@ -1,0 +1,45 @@
+<div class="ex1-wrap">
+  <div class="ex1-fieldset">
+    <div class="ex1-field">                  
+        <input class="ex1-input" [ngClass]="firstName ? 'val': ''" type="text" placeholder="John Doe" [(ngModel)]="firstName">
+        <label class="ex1-label">Name on Card</label><i class="ex1-bar"></i>
+    </div>
+    <!-- To render Card component - use cbCardField directive -->
+    <div id="card-field" cbCardField class="fieldset field"
+      [styles]="styles" 
+      [classes]="classes" 
+      [fonts]="fonts"
+      [placeholder]="placeholder"
+      [locale]="locale"
+      (ready)="setComponent($event)"
+    >
+      <!-- ^ Listen to ready event to receive the card component instance -->
+
+      <div class="ex1-field">
+        <!-- Number field, use cbNumberField directive -->
+        <div id="number-field" cbNumberField class="ex1-input" [placeholder]="'4111 1111 1111 1111'"></div>
+        <label class="ex1-label">Card Number</label><i class="ex1-bar"></i>
+      </div>
+
+      <div class="ex1-fields">
+        <div class="ex1-field">
+          <!-- Expiry field, use cbExpiryField directive -->
+          <div id="expiry-field" cbExpiryField class="ex1-input"></div>
+          <label class="ex1-label">Expiry</label><i class="ex1-bar"></i>
+        </div>
+
+        <div class="ex1-field">
+          <!-- CVV field, use cbCvvField directive -->
+          <div id="cvv-field" cbCvvField class="ex1-input"></div>
+          <label class="ex1-label">CVC</label><i class="ex1-bar"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Button to call tokenize method -->
+  <button type="submit" [ngClass]="loading ? 'submit': ''" class="ex1-button" (click)="tokenize()">Pay $x & Tokenize</button>
+
+  <!-- Display errors -->
+  <div class="error" role="alert" *ngIf="error">{{error}}</div>
+  <div class="token" *ngIf="token">{{token}}</div>
+</div>

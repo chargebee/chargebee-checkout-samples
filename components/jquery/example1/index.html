@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Chargebee Component Example 1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,500,600" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css">
+    <link rel="stylesheet" href="/menu.css">
+    <script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
+    <script src="https://js.chargebee.com/v2/chargebee.js"></script>
+    <script src="app.js"></script>
+  </head>
+  <body>
+    <div class="ex1-wrap">        
+        <form id="payment">
+            <div class="ex1-contain">
+                <div class="ex1-fieldset">
+                    <div class="ex1-field">                  
+                        <input class="ex1-input" type="text" placeholder="John Doe" >
+                        <label class="ex1-label">Name on Card</label><i class="ex1-bar"></i>
+                    </div>                          
+                    <div class="ex1-field">                  
+                        <div id="card-number" class="ex1-input"></div>
+                        <label class="ex1-label">Card Number</label><i class="ex1-bar"></i>
+                    </div>
+                    <div class="ex1-fields">
+                      <div class="ex1-field">                    
+                          <div id="card-expiry" class="ex1-input"></div>
+                          <label class="ex1-label">Expiry</label><i class="ex1-bar"></i>
+                      </div>
+                      <div class="ex1-field">                    
+                          <div id="card-cvc" class="ex1-input"></div>
+                          <label class="ex1-label">CVC</label><i class="ex1-bar"></i>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <button id="submit-button" type="submit" class="ex1-button">Pay $x & Tokenize</button>
+            <div id="error" role="alert"></div>
+            <div id="token"></div>
+        </form>        
+    </div>
+  </body>
+  <script src="/menu-loader.js"></script>
+</html>

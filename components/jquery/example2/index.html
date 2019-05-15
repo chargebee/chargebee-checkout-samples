@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Chargebee Component Example 1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,500,600" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css">
+    <link rel="stylesheet" href="/menu.css">
+    <script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
+    <script src="https://js.chargebee.com/v2/chargebee.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,500,600" rel="stylesheet">
+    <script src="app.js"></script>
+  </head>
+  <body>
+    <div class="ex2-wrap">      
+      <form id="payment">
+        <div class="ex2-fieldset">
+            <label class="ex2-field">                  
+                <span class="ex2-label">Name</span>
+                <input class="ex2-input" type="text" placeholder="John Doe">                  
+            </label>       
+            <label class="ex2-field">                  
+                <span class="ex2-label">Email</span>
+                <input class="ex2-input" type="text" placeholder="john@comp.any">                  
+            </label>                  
+            <label class="ex2-field">                  
+                <span class="ex2-label">Phone</span>
+                <input class="ex2-input" type="text" placeholder="+63 53242 32637"> 
+            </label>               
+            <label class="ex2-field">                  
+                <span id="card-combined" class="ex2-input"></span>
+            </label>                            
+        </div>
+        <button type="submit" id="tokenize" class="ex2-button">Pay $25 & Tokenize</button>
+        <div id="error" role="alert"></div>
+        <div id="token"></div>
+
+        <h3 style="margin-top: 30px;">Change theme:</h3>
+        <div class="theme-palette" style="margin-top: 15px;">
+          <button id="theme-1" class="ex2-button small">Theme1</button>
+          <button id="theme-2" class="ex2-button small">Theme2</button>
+          <button id="theme-3" class="ex2-button small">Theme3</button>
+          <button id="theme-4" class="ex2-button small">Theme4</button>
+        </div>
+        <h3 style="margin-top: 30px;">Actions:</h3>
+        <div class="theme-palette" style="margin-top: 15px;">
+            <button id="toggle-icon" class="ex2-button small">Toggle icon</button>
+            <button id="change-placeholder" class="ex2-button small">Placeholder</button>
+            <button id="focus-field" class="ex2-button small">Focus</button>
+            <button id="clear-button" class="ex2-button small">Clear</button>
+          </div>
+      </form>
+    </div>
+  </body>
+  <script src="/menu-loader.js"></script>
+</html>
