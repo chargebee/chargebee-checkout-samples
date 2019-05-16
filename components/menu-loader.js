@@ -57,16 +57,16 @@ document.body.appendChild(source);
 function getGithubSource(example, lib) {
   switch(lib) {
     case 'jquery': {
-      return `https://github.com/chargebee/chargebee-js/tree/component_examples/jquery/${example}#readme`
+      return `https://github.com/chargebee/chargebee-checkout-samples/tree/master/components/jquery/${example}#readme`
     }
     case 'vue': {
-      return `https://github.com/chargebee/chargebee-js/tree/component_examples/vue/cb-components-examples/src/components/${example}#readme`
+      return `https://github.com/chargebee/chargebee-checkout-samples/tree/master/components/vue/cb-components-examples/src/components/${example}#readme`
     }
     case 'react': {
-      return `https://github.com/chargebee/chargebee-js/tree/component_examples/react-app/src/components/${example}#readme`
+      return `https://github.com/chargebee/chargebee-checkout-samples/tree/master/components/react-app/src/components/${example}#readme`
     }
     case 'angular': {
-      return `https://github.com/chargebee/chargebee-js/tree/component_examples/angular-app/src/app/${example}#readme`
+      return `https://github.com/chargebee/chargebee-checkout-samples/tree/master/components/angular-app/src/app/${example}#readme`
     }
   }
   return 'javascript:void(0)'
