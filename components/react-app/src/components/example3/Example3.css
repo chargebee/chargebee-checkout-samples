@@ -21,10 +21,19 @@ a{
   border-bottom: 1px dotted;
 }
 
+.ex3.container {
+  margin: auto;
+  padding: 100px 0;
+  min-height: 100vh;
+  background: #fca571;
+  color: #252857;
+}
+
 .ex3-wrap{
   max-width: 480px;
-  margin: 80px auto;
+  margin: auto;
 }
+
 .ex3-contain{
   border-radius: 4px;
   background: #fff;

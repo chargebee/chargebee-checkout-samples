@@ -14,16 +14,16 @@ class App extends Component {
   }
 
   render() {
-    return (<Router basename="/react/">
-      <div>
+    return (
+      <Router basename="/react/">
         <Switch>
           <Route path="/example1" component={Example1} />
           <Route path="/example2" component={Example2} />
           <Route path="/example3" component={Example3} />
           <Route exact path="/" component={Example1} />
         </Switch>
-      </div>
-    </Router>)
+      </Router>
+    )
   }
 }
 

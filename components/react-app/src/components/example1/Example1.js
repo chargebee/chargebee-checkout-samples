@@ -101,48 +101,51 @@ export default class Example1 extends Component {
   render() {
     const { style, classes, locale, placeholder, fonts } = this.state.options;
     return (
-    <div className="ex1-wrap">
-      <div className="ex1-fieldset">
-      <div className="ex1-field">                  
-          <input name="firstName" className={ this.state.firstName ? "ex1-input val" : "ex1-input"} type="text" placeholder="John Doe" value={this.state.firstName} onChange={this.handleChange} />
-          <label className="ex1-label">Name on Card</label><i className="ex1-bar"></i>
+      <div className="ex1 container">
+        <div className="ex1-wrap">
+          <div className="ex1-fieldset">
+          <div className="ex1-field">                  
+              <input name="firstName" className={ this.state.firstName ? "ex1-input val" : "ex1-input"} type="text" placeholder="John Doe" value={this.state.firstName} onChange={this.handleChange} />
+              <label className="ex1-label">Name on Card</label><i className="ex1-bar"></i>
+          </div>
+
+          {/* Pass all options as props to card component  */}
+          {/* Assign ref to call internal methods */}
+          <CardComponent ref={this.cardRef} className="fieldset field"
+            styles={style} 
+            classes={classes} 
+            locale={locale}
+            placeholder={placeholder}
+            fonts={fonts}
+          >
+            <div className="ex1-field">
+              {/* Card number component */}
+              <CardNumber className="ex1-input"/>
+              <label className="ex1-label">Card Number</label><i className="ex1-bar"></i>
+            </div>
+
+            <div className="ex1-fields">
+              <div className="ex1-field">
+                {/* Card expiry component */}
+                <CardExpiry className="ex1-input"/>
+                <label className="ex1-label">Expiry</label><i className="ex1-bar"></i>
+              </div>
+
+              <div className="ex1-field">
+                {/* Card cvv component */}
+                <CardCVV className="ex1-input"/>
+                <label className="ex1-label">CVC</label><i className="ex1-bar"></i>
+              </div>
+
+            </div>
+          </CardComponent>
+
+        </div>
+        <button type="submit" className={ this.state.loading ? "submit ex1-button" : "ex1-button"} onClick={this.tokenize}>Pay $x & Tokenize</button>
+        {this.state.error && <div className="error" role="alert">{this.state.error}</div>}
+        {this.state.token && <div className="token" >{this.state.token}</div>}
       </div>
-
-      {/* Pass all options as props to card component  */}
-      {/* Assign ref to call internal methods */}
-      <CardComponent ref={this.cardRef} className="fieldset field"
-        styles={style} 
-        classes={classes} 
-        locale={locale}
-        placeholder={placeholder}
-        fonts={fonts}
-      >
-        <div className="ex1-field">
-          {/* Card number component */}
-          <CardNumber className="ex1-input"/>
-          <label className="ex1-label">Card Number</label><i className="ex1-bar"></i>
-        </div>
-
-        <div className="ex1-fields">
-          <div className="ex1-field">
-            {/* Card expiry component */}
-            <CardExpiry className="ex1-input"/>
-            <label className="ex1-label">Expiry</label><i className="ex1-bar"></i>
-          </div>
-
-          <div className="ex1-field">
-            {/* Card cvv component */}
-            <CardCVV className="ex1-input"/>
-            <label className="ex1-label">CVC</label><i className="ex1-bar"></i>
-          </div>
-
-        </div>
-      </CardComponent>
-
-    </div>
-    <button type="submit" className={ this.state.loading ? "submit ex1-button" : "ex1-button"} onClick={this.tokenize}>Pay $x & Tokenize</button>
-    {this.state.error && <div className="error" role="alert">{this.state.error}</div>}
-    {this.state.token && <div className="token" >{this.state.token}</div>}
-  </div>);
+      </div>
+    );
   }
 }

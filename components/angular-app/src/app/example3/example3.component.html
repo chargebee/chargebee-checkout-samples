@@ -1,5 +1,5 @@
-
-<div class="ex1-wrap">
+<div class="ex3 container">
+  <div class="ex1-wrap">
     <form id="payment">
         <div class="ex1-contain">
           <div class="ex1-fieldset">
@@ -8,7 +8,7 @@
                   <i class="ex1-bar"></i>                  
               </div> 
               
-               <!-- To render Card field, use cbCardField directive -->
+              <!-- To render Card field, use cbCardField directive -->
               <div id="card-field" cbCardField class="fieldset field" 
                 [styles]="styles" 
                 [classes]="classes" 
@@ -50,7 +50,7 @@
         <button type="submit" [ngClass]="loading ? 'submit': ''" class="ex1-button" (click)="tokenize()">Pay $x & Tokenize</button>
         <div class="error" role="alert" *ngIf="errorMessage">{{errorMessage}}</div>
         <div class="token" *ngIf="token">{{token}}</div>
-        <h4 style="margin-top: 30px">Select Locale:</h4>
+        <h4 class="title">Select Locale:</h4>
         <div class="language-palette" style="margin-top: 15px;">
           <button id="en" class="ex1-button small" (click)="setLocale('en')">EN</button>
           <button id="fr" class="ex1-button small" (click)="setLocale('fr')">FR</button>
@@ -60,4 +60,5 @@
           <button id="de" class="ex1-button small" (click)="setLocale('de')">DE</button>
         </div>
     </form>
+  </div>
 </div>

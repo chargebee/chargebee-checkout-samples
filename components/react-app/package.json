@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "/react/",
   "dependencies": {
-    "@chargebee/chargebee-js-react-wrapper": "^0.1.3",
+    "@chargebee/chargebee-js-react-wrapper": "^0.1.4",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router": "^5.0.0",

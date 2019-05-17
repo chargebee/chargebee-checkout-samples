@@ -148,10 +148,11 @@ export default class Example1 extends Component {
     const { firstName, loading, errorMessage, token } = this.state;
     const { style, classes, locale, fonts } = this.state.options;
     return (
-      <div className="ex3-wrap">      
-      <form id="payment">
-          <div className="ex3-contain">
-            <div className="ex3-fieldset">
+      <div className="ex3 container">
+        <div className="ex3-wrap">      
+          <form id="payment">
+            <div className="ex3-contain">
+              <div className="ex3-fieldset">
                 <div className="ex3-field">                  
                     <input name="firstName" className={ firstName ? "ex3-input val" : "ex3-input"} type="text" placeholder="John Doe" value={firstName} onChange={this.handleChange} />
                     <i className="ex3-bar"></i>                  
@@ -187,22 +188,23 @@ export default class Example1 extends Component {
                     </div>
                   </div>
                 </CardComponent>
+              </div>
             </div>
-          </div>
-          <button className={ loading ? "submit ex3-button" : "ex3-button"} onClick={this.tokenize}>Pay $x & Tokenize</button>
-          {errorMessage && <div className="error" role="alert">{errorMessage}</div>}
-          {token && <div className="token" >{token}</div>}
-          <h4 style={{marginTop: 30, color: 'white'}}>Select Locale:</h4>
-          <div className="language-palette" style={{marginTop: 15}}>
-            <button id="en" className="ex3-button small" onClick={this.setLocale}>EN</button>
-            <button id="fr" className="ex3-button small" onClick={this.setLocale}>FR</button>
-            <button id="es" className="ex3-button small" onClick={this.setLocale}>ES</button>
-            <button id="pt" className="ex3-button small" onClick={this.setLocale}>PT</button>
-            <button id="it" className="ex3-button small" onClick={this.setLocale}>IT</button>
-            <button id="de" className="ex3-button small" onClick={this.setLocale}>DE</button>
-          </div>
-      </form>
-  </div>
+            <button className={ loading ? "submit ex3-button" : "ex3-button"} onClick={this.tokenize}>Pay $x & Tokenize</button>
+            {errorMessage && <div className="error" role="alert">{errorMessage}</div>}
+            {token && <div className="token" >{token}</div>}
+            <h4 style={{marginTop: 30}}>Select Locale:</h4>
+            <div className="language-palette" style={{marginTop: 15}}>
+              <button id="en" className="ex3-button small" onClick={this.setLocale}>EN</button>
+              <button id="fr" className="ex3-button small" onClick={this.setLocale}>FR</button>
+              <button id="es" className="ex3-button small" onClick={this.setLocale}>ES</button>
+              <button id="pt" className="ex3-button small" onClick={this.setLocale}>PT</button>
+              <button id="it" className="ex3-button small" onClick={this.setLocale}>IT</button>
+              <button id="de" className="ex3-button small" onClick={this.setLocale}>DE</button>
+            </div>
+          </form>
+        </div>
+      </div>
     );
   }
 }
