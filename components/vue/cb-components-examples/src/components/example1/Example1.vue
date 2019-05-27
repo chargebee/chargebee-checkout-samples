@@ -1,5 +1,6 @@
 <template>
-  <div class="ex1-wrap">
+  <div class="ex1 container">
+    <div class="ex1-wrap">
     <div class="ex1-fieldset">
       <div class="ex1-field">                  
           <input class="ex1-input" :class="{'val': firstName}" type="text" placeholder="John Doe" v-model="firstName">
@@ -40,6 +41,7 @@
     <button type="submit" :class="{'submit': loading}" class="ex1-button" @click="tokenize">Pay $x & Tokenize</button>
     <div class="error" role="alert" v-if="error">{{error}}</div>
     <div class="token" v-if="token">{{token}}</div>
+  </div>
   </div>
 </template>
 <script>
@@ -170,9 +172,15 @@ a{
   border-bottom: 1px dotted;
 }
 
+.ex1.container {
+  margin: auto;
+  padding: 100px 0;
+  min-height: 100vh;
+}
+
 .ex1-wrap{
   max-width: 400px;
-  margin: 80px auto;
+  margin: auto;
   border-radius: 8px;
   background: #fff;
   padding: 32px;

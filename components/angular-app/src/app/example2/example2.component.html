@@ -1,40 +1,49 @@
-<div class="ex2-wrap">
-  <div class="ex2-fieldset">
-    <label class="ex2-field">
-      <span class="ex2-label">Name</span>
-      <input class="ex2-input" [(ngModel)]="firstName" type="text" placeholder="John Doe">
-    </label>
-    <label class="ex2-field">
-      <span class="ex2-label">Email</span>
-      <input class="ex2-input" type="text" [(ngModel)]="email" placeholder="john@comp.any">
-    </label>
-    <label class="ex2-field">
-      <span class="ex2-label">Phone</span>
-      <input class="ex2-input" type="text" [(ngModel)]="phone" placeholder="+63 53242 32637">
-    </label>
-    <label class="ex2-field">
-      <!-- To render Card component, use cbCardField directive (combined mode) -->
-      <div cbCardField id="card-field" class="ex2-input fieldset field" 
-        [icon]="icon" 
-        [styles]="styles" 
-        [classes]="classes" 
-        [fonts]="fonts" 
-        [placeholder]="placeholder"
-        (ready)="onReady($event)"
-      ></div>
-    </label>
-  </div>
-  <button type="submit" [ngClass]="loading ? 'submit': ''" class="ex2-button" (click)="tokenize()">Pay $x & Tokenize</button>
-  <div class="error" role="alert" *ngIf="error">{{error}}</div>
-  <div class="token" *ngIf="token">{{token}}</div>
-  <h3 style="margin-top: 30px">Actions: </h3>
-  <div class="action-palette" style="display: flex;">
-    <button class="ex2-button small" (click)="toggleCardIcon()">Toggle icon</button> &nbsp;
-    <button class="ex2-button small" (click)="increaseFontSize()">+ font</button>  &nbsp;
-    <button class="ex2-button small" (click)="decreaseFontSize()">- font</button>  &nbsp;
-  </div>
-  <div class="action-palette" style="display: flex;">
-    <button class="ex2-button small" (click)="clear()">clear</button> &nbsp;
-    <button class="ex2-button small" (click)="changePlaceholder()">placeholder</button>  &nbsp;
+<div class="ex2 container">
+  <div class="ex2-wrap">
+    <div class="ex2-fieldset">
+      <label class="ex2-field">
+        <span class="ex2-label">Name</span>
+        <input class="ex2-input" [(ngModel)]="firstName" type="text" placeholder="John Doe">
+      </label>
+      <label class="ex2-field">
+        <span class="ex2-label">Email</span>
+        <input class="ex2-input" type="text" [(ngModel)]="email" placeholder="john@comp.any">
+      </label>
+      <label class="ex2-field">
+        <span class="ex2-label">Phone</span>
+        <input class="ex2-input" type="text" [(ngModel)]="phone" placeholder="+63 53242 32637">
+      </label>
+      <label class="ex2-field">
+        <!-- To render Card component, use cbCardField directive (combined mode) -->
+        <div cbCardField id="card-field" class="ex2-input fieldset field" 
+          [icon]="icon" 
+          [styles]="styles" 
+          [classes]="classes" 
+          [fonts]="fonts" 
+          [placeholder]="placeholder"
+          (ready)="onReady($event)"
+        ></div>
+      </label>
+    </div>
+    <button type="submit" [ngClass]="loading ? 'submit': ''" class="ex2-button" (click)="tokenize()">Pay $x & Tokenize</button>
+    <div class="error" role="alert" *ngIf="error">{{error}}</div>
+    <div class="token" *ngIf="token">{{token}}</div>
+    <h4 class="title" >Change theme: </h4>
+    <div class="theme-palette" style="margin-top: 15px">
+      <button id="theme-1" class="ex2-button" (click)="setTheme($event, 0)">Theme1</button>
+      <button id="theme-2" class="ex2-button" (click)="setTheme($event, 1)">Theme2</button>
+      <button id="theme-3" class="ex2-button" (click)="setTheme($event, 2)">Theme3</button>
+      <button id="theme-4" class="ex2-button" (click)="setTheme($event, 3)">Theme4</button>
+    </div>
+    <h4 class="title">Actions: </h4>
+    <div class="action-palette" style="display: flex;">
+      <button class="ex2-button small" (click)="toggleCardIcon()">Toggle icon</button> &nbsp;
+      <button class="ex2-button small" (click)="increaseFontSize()">+ font</button>  &nbsp;
+      <button class="ex2-button small" (click)="decreaseFontSize()">- font</button>  &nbsp;
+    </div>
+    <div class="action-palette" style="display: flex;">
+      <button class="ex2-button small" (click)="clear()">clear</button> &nbsp;
+      <button class="ex2-button small" (click)="changePlaceholder()">placeholder</button>  &nbsp;
+    </div>
   </div>
 </div>

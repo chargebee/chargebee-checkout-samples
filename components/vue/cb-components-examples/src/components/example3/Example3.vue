@@ -1,5 +1,6 @@
 <template>
-<div class="ex3-wrap">      
+  <div class="ex3 container">
+    <div class="ex3-wrap">      
       <form id="payment">
           <div class="ex3-contain">
             <div class="ex3-fieldset">
@@ -35,7 +36,8 @@
           <button type="submit" :class="{'submit': loading}" class="ex3-button" @click="tokenize">Pay $x & Tokenize</button>
           <div id="error" class="error" role="alert" v-if="errorMessage">{{errorMessage}}</div>
           <div class="token" v-if="token">{{token}}</div>
-          <h3>Select Locale:</h3>
+          <br />
+          <h4>Select Locale:</h4>
           <div class="language-palette" style="margin-top: 15px;">
             <button id="en" class="ex3-button small" @click="setLocale">EN</button>
             <button id="fr" class="ex3-button small" @click="setLocale">FR</button>
@@ -46,7 +48,7 @@
           </div>
       </form>
   </div>
-  
+  </div>
 </template>
 
 <script>
@@ -207,10 +209,19 @@ a{
   border-bottom: 1px dotted;
 }
 
+.ex3.container {
+  margin: auto;
+  padding: 100px 0;
+  min-height: 100vh;
+  background: #fca571;
+  color: #252857;
+}
+
 .ex3-wrap{
   max-width: 480px;
-  margin: 80px auto;
+  margin: auto;
 }
+
 .ex3-contain{
   border-radius: 4px;
   background: #fff;

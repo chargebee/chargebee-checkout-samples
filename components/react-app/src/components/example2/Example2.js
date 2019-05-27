@@ -156,48 +156,51 @@ export default class Example2 extends Component {
   render() {
     const { cardIcon, styles, classes } = this.state;
     return (
-    <div className="ex2-wrap">
-      <div className="ex2-fieldset">
-      <label className="ex2-field">                  
-        <span className="ex2-label">Name</span>
-        <input name="firstName" className={ this.state.firstName ? "ex2-input val" : "ex2-input"} type="text" placeholder="John Doe" value={this.state.firstName} onChange={this.handleChange} />
-      </label>
-      <label className="ex2-field">                  
-        <span className="ex2-label">Email</span>
-        <input name="email" className={ this.state.email ? "ex2-input val" : "ex2-input"} type="text" placeholder="john@comp.any" value={this.state.email} onChange={this.handleChange} />
-      </label>
-      <label className="ex2-field">                  
-        <span className="ex2-label">Phone</span>
-        <input name="phone" className={ this.state.phone ? "ex2-input val" : "ex2-input"} type="text" placeholder="+63 53242 32637" value={this.state.phone} onChange={this.handleChange} />
-      </label>
+      <div className="ex2 container">
+        <div className="ex2-wrap">
+          <div className="ex2-fieldset">
+            <label className="ex2-field">                  
+              <span className="ex2-label">Name</span>
+              <input name="firstName" className={ this.state.firstName ? "ex2-input val" : "ex2-input"} type="text" placeholder="John Doe" value={this.state.firstName} onChange={this.handleChange} />
+            </label>
+            <label className="ex2-field">                  
+              <span className="ex2-label">Email</span>
+              <input name="email" className={ this.state.email ? "ex2-input val" : "ex2-input"} type="text" placeholder="john@comp.any" value={this.state.email} onChange={this.handleChange} />
+            </label>
+            <label className="ex2-field">                  
+              <span className="ex2-label">Phone</span>
+              <input name="phone" className={ this.state.phone ? "ex2-input val" : "ex2-input"} type="text" placeholder="+63 53242 32637" value={this.state.phone} onChange={this.handleChange} />
+            </label>
 
-      <label className="ex2-field">
-        {/* Render card component in combined-mode */}
-        <CardComponent ref={this.cardRef} className="ex2-input fieldset field"
-          icon={cardIcon}
-          styles={styles}
-          classes={classes} 
-        />
-      </label>
-    </div>
-    <button type="submit" className={ this.state.loading ? "submit ex2-button" : "ex2-button"} onClick={this.tokenize}>Pay $x & Tokenize</button>
-    {this.state.error && <div className="error" role="alert">{this.state.error}</div>}
-    {this.state.token && <div className="token" >{this.state.token}</div>}
-    <h4 className="title" >Change theme: </h4>
-    <div className="theme-palette" style={{marginTop: 15}}>
-      <button className="ex2-button primary-btn" onClick={this.toggleCardIcon}>Icon</button> &nbsp;
-      <button id="theme-1" className="ex2-button" onClick={e => this.setTheme(e, 0)}>Theme1</button>
-      <button id="theme-2" className="ex2-button" onClick={e => this.setTheme(e, 1)}>Theme2</button>
-      <button id="theme-3" className="ex2-button" onClick={e => this.setTheme(e, 2)}>Theme3</button>
-      <button id="theme-4" className="ex2-button" onClick={e => this.setTheme(e, 3)}>Theme4</button>
-    </div>
-    <h4 className="title" >Actions:</h4>
-    <div className="theme-palette" style={{marginTop: 15}}>
-      <button className="ex2-button" onClick={this.increaseFontSize}>+ Font size</button>
-      <button className="ex2-button" onClick={this.decreaseFontSize}>- Font size</button>
-      <button className="ex2-button" onClick={this.focus}>Focus</button>
-    </div>
-  </div>);
+            <label className="ex2-field">
+              {/* Render card component in combined-mode */}
+              <CardComponent ref={this.cardRef} className="ex2-input fieldset field"
+                icon={cardIcon}
+                styles={styles}
+                classes={classes} 
+              />
+            </label>
+          </div>
+          <button type="submit" className={ this.state.loading ? "submit ex2-button" : "ex2-button"} onClick={this.tokenize}>Pay $x & Tokenize</button>
+          {this.state.error && <div className="error" role="alert">{this.state.error}</div>}
+          {this.state.token && <div className="token" >{this.state.token}</div>}
+          <h4 className="title" >Change theme: </h4>
+          <div className="theme-palette" style={{marginTop: 15}}>
+            <button className="ex2-button primary-btn" onClick={this.toggleCardIcon}>Icon</button> &nbsp;
+            <button id="theme-1" className="ex2-button" onClick={e => this.setTheme(e, 0)}>Theme1</button>
+            <button id="theme-2" className="ex2-button" onClick={e => this.setTheme(e, 1)}>Theme2</button>
+            <button id="theme-3" className="ex2-button" onClick={e => this.setTheme(e, 2)}>Theme3</button>
+            <button id="theme-4" className="ex2-button" onClick={e => this.setTheme(e, 3)}>Theme4</button>
+          </div>
+          <h4 className="title" >Actions:</h4>
+          <div className="theme-palette" style={{marginTop: 15}}>
+            <button className="ex2-button" onClick={this.increaseFontSize}>+ Font size</button>
+            <button className="ex2-button" onClick={this.decreaseFontSize}>- Font size</button>
+            <button className="ex2-button" onClick={this.focus}>Focus</button>
+          </div>
+        </div>
+      </div>
+    );
   }
 }
 
