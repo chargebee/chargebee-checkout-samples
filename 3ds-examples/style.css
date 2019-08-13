@@ -148,6 +148,10 @@ a{
   transition-duration: 0s;
 }
 
+.ex1-button:disabled {
+  background: #999;
+}
+
 #status {
   color: #006400;
   padding: 10px;
