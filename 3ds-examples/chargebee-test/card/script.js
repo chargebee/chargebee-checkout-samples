@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
   chargebeeInstance.load3DSHandler()
     .then(threeDSHandler => {
       threeDS = threeDSHandler;
-      return createPaymentIntent({amount: 3001});
+      return createPaymentIntent({amount: 3001, gateway_account_id:'gw_1mbDWaRR1RzyLDH9J'});
     })
     .then(paymentIntent => {
       threeDS.setPaymentIntent(paymentIntent);
