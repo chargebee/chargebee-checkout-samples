@@ -5,6 +5,14 @@ var menu = {
     subMenu: {
       element: { key: "element", name: "Using Element" },
       card: { key: "card", name: "Using Card" }
+    },
+    testCard: {
+      table: [
+        ["Card Number", "Expiry Date", "CVC/CVV"],
+        ["4917 6100 0000 0000", "10/20", "737"],
+        ["5454 5454 5454 5454", "10/20", "737"]
+      ],
+      moreLink: "https://docs.adyen.com/development-resources/test-cards/test-card-numbers#test-3d-secure-2-authentication",
     }
   },
   'chargebee-test': {
@@ -12,6 +20,13 @@ var menu = {
     name: "Chargebee Test",
     subMenu: {
       card: { key: "card", name: "Using Card" }
+    },
+    testCard : {
+      table: [
+        ["Card Number", "Expiry Date", "CVV", "Type"],
+        ["4556 7610 2998 3886", "10/29", "123", "Valid 3DS Enrolled"],
+        ["4024 0071 0193 4890", "10/29", "123", "Invalid 3DS Enrolled"],
+      ]
     }
   }
 };
@@ -49,6 +64,39 @@ menuHTML.innerHTML = `
   </div>
 </div>`;
 document.body.appendChild(menuHTML);
+
+if(activeCategory.testCard) {
+  var tc = activeCategory.testCard;
+  var testCardHTML = document.createElement('div');
+  testCardHTML.classList.add('test-card-wrap');
+  testCardHTML.innerHTML = genTestCardHTML(tc);
+  if(document.getElementsByClassName('ex1-wrap')[0]) {
+    document.getElementsByClassName('ex1-wrap')[0].appendChild(testCardHTML);
+  } else {
+    document.body.appendChild(testCardHTML);
+  }
+}
+
+function genTestCardHTML(tc) {
+  var html = '';
+  if(tc.table) {
+    html = '<table>'
+    var addAsHead = true;
+    tc.table.forEach(tr => {
+      html += `<tr>`;
+      tr.forEach(td => {
+        html += addAsHead ? `<th>${td}</th>` : `<td>${td}</td>`;
+      })
+      html += `</tr>`;
+      addAsHead = false;
+    });
+    html += '</table>'
+  }
+  if(tc.moreLink) {
+    html += `<div class="more"><a href="${tc.moreLink}" target="_blank">${tc.moreLinkText ? tc.moreLinkText : 'Click here for more test cards'}</a></div>`;
+  }
+  return html;
+}
 
 var source = document.createElement('div')
 source.classList.add('view-source')
