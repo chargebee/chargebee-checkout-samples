@@ -11,20 +11,21 @@
     <script src="https://js.chargebee.com/v2/chargebee.js"></script>
     <script src="script.js"></script>
 
-    <script src="https://checkoutshopper-live.adyen.com/checkoutshopper/sdk/3.0.0/adyen.js"></script>
-    <link rel="stylesheet" href="https://checkoutshopper-live.adyen.com/checkoutshopper/sdk/3.0.0/adyen.css" />
+    <script src="https://checkoutshopper-live.adyen.com/checkoutshopper/sdk/3.1.0/adyen.js"></script>
+    <link rel="stylesheet" href="https://checkoutshopper-live.adyen.com/checkoutshopper/sdk/3.1.0/adyen.css" />
   </head>
   <body>
       <div class="ex1-wrap">
-          <div id="payment-form">
-              <div class="ex1-contain">
+          <form id="payment-form">
+              <div class="ex1-contain" style="min-height: 180px">
                   <div class="ex1-fieldset">
                       <div id="card-container"></div>
                   </div>
               </div>
               <button id="submit-button" type="submit" class="ex1-button">
-                Pay $100 & Tokenize
+                Submit
               </button>
+              <div id="status"></div>
           </form>
       </div>
   </body>

@@ -13,6 +13,19 @@
   </head>
   <body>
     <div class="ex1-wrap">
+
+      <label class="ch-select" style="margin-bottom: 10px">
+          <span class="ch-select__label">Scenario</span>
+          <select class="ch-select__control" id="scenario-chooser">
+              <option value="3001" selected="">3DS2 full frictionless flow</option>
+              <option value="3002">Fallback from 3DS2 to 3DS1</option>
+              <option value="3003">3DS device fingerprint flow with direct authorize</option>
+              <option value="3004">3DS device fingerprint flow to challenge</option>
+              <option value="3103">3DS device fingerprint flow with forced failure</option>
+              <option value="3104">3DS challenge flow with forced failure</option>
+          </select>
+      </label>
+
       <form id="payment-form">
         <div class="ex1-contain">
           <div class="ex1-fieldset">
@@ -27,27 +40,27 @@
               </div>
             </div>
             <div class="ex1-field">
-              <input class="ex1-input" type="text" id='cc-number' name='cc-number' placeholder="4111 1111 1111 1111"/>
+              <input class="ex1-input" type="text" id='cc-number' name='cc-number' placeholder="4111 1111 1111 1111" required/>
               <label class="ex1-label">Card Number</label><i class="ex1-bar"></i>
             </div>
             <div class="ex1-fields">
               <div class="ex1-field">
-                  <input class="ex1-input" type="text" id='cc-month' name='cc-month' placeholder="MM" />
+                  <input class="ex1-input" type="text" id='cc-month' name='cc-month' placeholder="MM" required/>
                 <label class="ex1-label">Expiry Month</label><i class="ex1-bar"></i>
               </div>
               <div class="ex1-field">
-                  <input class="ex1-input" type="text" id='cc-year' name='cc-year' placeholder="YYYY" />
+                  <input class="ex1-input" type="text" id='cc-year' name='cc-year' placeholder="YYYY" required/>
                 <label class="ex1-label">Expiry Year</label><i class="ex1-bar"></i>
               </div>
               <div class="ex1-field">
-                  <input class="ex1-input" type="text" id='cc-cvv' name='cc-cvv' placeholder="123" />
+                  <input class="ex1-input" type="text" id='cc-cvv' name='cc-cvv' placeholder="123" required/>
                 <label class="ex1-label">CVV</label><i class="ex1-bar"></i>
               </div>
             </div>
           </div>
         </div>
         <button id="submit-button" type="submit" class="ex1-button">
-          Pay $100 & Tokenize
+          Submit
         </button>
         <div id="status"></div>
       </form>

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Lato:300,500,600&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,500,600,700&display=swap');
 
 *{
   margin: 0;
@@ -148,6 +148,10 @@ a{
   transition-duration: 0s;
 }
 
+.ex1-button:disabled {
+  background: #999;
+}
+
 #status {
   color: #006400;
   padding: 10px;
@@ -157,4 +161,39 @@ a{
 
 #status.error {
   color: #e41029;
+}
+
+.test-card-wrap {
+  font-size: 14px;
+  max-width: 480px;
+  margin-top: 120px;
+}
+
+.test-card-wrap .more{
+  text-align: center;
+  font-weight: 500;
+}
+
+.test-card-wrap .more a {
+  color: #3361c3;
+}
+
+.test-card-wrap, table{
+  width: 100%;
+  border-spacing: 0;
+  padding: 10px 0;
+}
+
+.test-card-wrap table th, .test-card-wrap table td {
+  text-align: left;
+  padding: 5px;
+}
+
+.test-card-wrap table th {
+  /* border-bottom: 1px solid #9cafd3; */
+  font-weight: 500;
+}
+
+.test-card-wrap table td {
+  border-top: 1px solid #b5c6e5;
 }
