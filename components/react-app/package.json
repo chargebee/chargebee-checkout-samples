@@ -2,7 +2,7 @@
   "name": "react-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/react/",
+  "homepage": "/components-examples/react/",
   "dependencies": {
     "@chargebee/chargebee-js-react-wrapper": "^0.2.1",
     "react": "^16.8.6",

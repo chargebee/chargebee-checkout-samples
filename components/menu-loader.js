@@ -207,7 +207,7 @@ function init() {
     setGitLink(exId, lib);
     setSourceCodeContents(exId);
 
-    const finalUrl = `${window.location.origin}/${lib_url}${example_path}`;
+    const finalUrl = `${window.location.origin}/components-examples/${lib_url}${example_path}`;
     window.location.replace(finalUrl)
   }
 
