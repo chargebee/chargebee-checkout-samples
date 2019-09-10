@@ -1,0 +1,46 @@
+<div class="ex3 container">
+  <div class="ex1-wrap">
+    <form id="payment">
+        <div class="ex1-contain">
+          <div class="ex1-fieldset">
+              <div class="ex1-field">                  
+                  <input class="ex1-input" type="text" placeholder="John Doe" >  
+                  <i class="ex1-bar"></i>                  
+              </div> 
+              
+              <!-- To render Card field, use cbCardField directive -->
+              <div id="card-field" cbCardField class="fieldset field" 
+                [styles]="styles" 
+                [classes]="classes" 
+                [fonts]="fonts"
+                [locale]="locale"
+                (ready)="setComponent($event)"
+                (change)="onChange($event)"
+              >
+                <div class="ex1-field">                  
+                  <!-- Number field: use cbNumberField directive -->
+                  <div id="number-field" cbNumberField class="ex1-input"></div>
+                  <i class="ex1-bar"></i>                  
+                </div>
+                <div class="ex1-fields">
+                  <div class="ex1-field"> 
+                    <!-- Expiry field: use cbExpiryField directive -->                   
+                    <div id="expiry-field" cbExpiryField class="ex1-input"></div>
+                    <i class="ex1-bar"></i>                    
+                  </div>
+                  <div class="ex1-field">       
+                    <!-- CVV field: use cbCvvField directive -->             
+                    <div id="cvv-field" cbCvvField class="ex1-input"></div>
+                    <i class="ex1-bar"></i>                 
+                  </div>
+                </div>
+              </div>
+
+          </div>
+        </div>
+        <button type="submit" [ngClass]="loading ? 'submit': ''" class="ex1-button" (click)="authorize()">3DS Authorize</button>
+        <div class="error" role="alert" *ngIf="errorMessage">{{errorMessage}}</div>
+        <div class="token" *ngIf="token">{{token}}</div>
+    </form>
+  </div>
+</div>
