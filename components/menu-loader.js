@@ -26,7 +26,10 @@ menu.innerHTML = `
                   </a>
                   <a id="example3" class="ch-nav__item" href="javascript:void(0)" >
                       Example #3
-                  </a>                  
+                  </a>
+                  <a id="example4" class="ch-nav__item" href="javascript:void(0)" >
+                      Example #4
+                  </a>
               </div>
               <div class="ch-nav__mobile">
                 <label class="ch-select">
@@ -35,6 +38,7 @@ menu.innerHTML = `
                         <option value="example1">Example 1</option>
                         <option value="example2">Example 2</option>
                         <option value="example3">Example 3</option>
+                        <option value="example4">Example 4</option>
                     </select>
                 </label>
               </div>
@@ -119,6 +123,15 @@ function setSourceCodeContents(example) {
       `
       break;
     }
+    case 'example4': {
+      div.innerHTML = `
+        <ul>
+          <li>3DS Authorization</li>
+          <li>Creating a subscription with Paymen Intent ID</li>
+        </ul>
+      `
+      break;
+    }
   }
 }
 
@@ -183,6 +196,12 @@ function init() {
         example_path = 'example3/'
         break;
       }
+      case 'example4': {
+        example_path = 'example4/'
+        break;
+      }
+      default:
+        example_path = 'example1/'
     }
     
     setGitLink(exId, lib);

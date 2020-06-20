@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Components & Fields - Integration Example</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://js.chargebee.com/v2/chargebee.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,500,600" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/menu.css">
+</head>
+<body>
+    <div class="ex1-wrap">
+        <div class="ex1-wrap__title">Checkout</div>
+        <div class="ex-wiz">
+            <div class="ex-wiz__item is-active back-to-billing" id="wizard-billing">Billing Info</div>
+            <div class="ex-wiz__item" id="wizard-payment">Payment</div>
+            <div class="ex-wiz__item" id="wizard-success">Success</div>
+        </div>
+        <div class="ex1-block">
+            <div class="ex1-aide">
+                <div class="ex1-order" id="plan-details">
+                    <div class="ex1-title">Order Summary</div>
+                    <div class="ex1-fieldset">
+                        <div>Plan</div>
+                        <div class="ex1-field">
+                            <select name="plan" id="plan" class="ex1-input">
+                                <option value="" default disabled>Select one</option>
+                            </select>
+                            <label class="ex1-label"></label><i class="ex1-bar"></i>
+                        </div> 
+                        <div>
+                            <div>Total:</div>
+                            <h4 name="plan-price"></h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="ex1-main">
+                <form id="billing-form">
+                <div class="ex1-data" id="billing-details">
+                    <div class="ex1-title">Billing Details</div>
+                    <div class="ex1-contain">
+                        <div class="ex1-fieldset">
+                            <div class="ex1-field">                  
+                                <input name="email" class="ex1-input" type="text" placeholder="johndoe@example.com" >
+                                <label class="ex1-label">Email</label><i class="ex1-bar"></i>
+                            </div> 
+                            <div class="ex1-fields">
+                              <div class="ex1-field">                  
+                                  <input name="firstName" class="ex1-input" type="text" placeholder="John" >
+                                  <label class="ex1-label">First Name</label><i class="ex1-bar"></i>
+                              </div> 
+                              <div class="ex1-field">                  
+                                  <input name="lastName" class="ex1-input" type="text" placeholder="Doe" >
+                                  <label class="ex1-label">Last Name</label><i class="ex1-bar"></i>
+                              </div>
+                            </div>
+                            <div class="ex1-field">                  
+                                <input name="addressLine1" class="ex1-input" type="text" placeholder="Address" >
+                                <label class="ex1-label">Address Line 1</label><i class="ex1-bar"></i>
+                            </div>
+                            <div class="ex1-field">                  
+                                <input name="addressLine2" class="ex1-input" type="text" placeholder="Address" >
+                                <label class="ex1-label">Address Line 2</label><i class="ex1-bar"></i>
+                            </div>
+                            <div class="ex1-field">                  
+                                <input name="city" class="ex1-input" type="text" placeholder="Berlin" >
+                                <label class="ex1-label">City</label><i class="ex1-bar"></i>
+                            </div>
+                            <div class="ex1-field">
+                                <input name="state" class="ex1-input" type="text" placeholder="Georgia" >
+                                <label class="ex1-label">State</label><i class="ex1-bar"></i>
+                            </div>
+                            <div class="ex1-fields">
+                            <div class="ex1-field">
+                                <input name="stateCode" class="ex1-input" type="text" placeholder="GE" >
+                                <label class="ex1-label">State Code</label><i class="ex1-bar"></i>
+                            </div>
+                            <div class="ex1-field">                  
+                                <input name="zip" class="ex1-input" type="text" placeholder="110012" >
+                                <label class="ex1-label">Zip Code</label><i class="ex1-bar"></i>
+                            </div>
+                            </div>
+                            <div class="ex1-field">
+                                <input name="countryCode" class="ex1-input" type="text" placeholder="FR" >
+                                <label class="ex1-label">Country Code</label><i class="ex1-bar"></i>
+                            </div>
+                        </div>
+                        <button type="submit" id="billing-button" class="ex1-button">Proceed to Payment</button>
+                    </div>
+                </div>
+                </form>
+                <form id="payment-form">
+                <div class="ex1-data" id="payment-details">
+                    <div class="ex1-title">Payment details</div>
+                    <div class="ex1-contain">
+                        <div class="ex1-fieldset">
+                            <div class="ex1-field">                  
+                                <input class="ex1-input" type="text" placeholder="John Doe" required>
+                                <label class="ex1-label">Name on Card</label><i class="ex1-bar"></i>
+                            </div>                          
+                            <div class="ex1-field">                  
+                                <div id="card-number" class="ex1-input"></div>
+                                <label class="ex1-label">Card Number</label><i class="ex1-bar"></i>
+                            </div>
+                            <div class="ex1-fields">
+                                <div class="ex1-field">                    
+                                    <div id="card-expiry" class="ex1-input"></div>
+                                    <label class="ex1-label">Expiry</label><i class="ex1-bar"></i>
+                                </div>
+                                <div class="ex1-field">                    
+                                    <div id="card-cvc" class="ex1-input"></div>
+                                    <label class="ex1-label">CVC</label><i class="ex1-bar"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <button id="submit-button" type="submit" class="ex1-button">Pay <span name="plan-price"></span> & Tokenize</button>
+                <div id="error" role="alert"></div>
+                <div id="token"></div>
+                </div>
+            </div>
+        </div>
+      <div id="success-form" class="hidden"></div>
+  </div>
+  <script type="text/javascript">
+    var cardComponentOptions = {
+      fonts: [
+        'https://fonts.googleapis.com/css?family=Roboto:300,500,600'
+      ],
+    
+      // add classes for different states
+      classes: {
+        focus: 'focus',
+        invalid: 'invalid',
+        empty: 'empty',
+        complete: 'complete',
+      },
+    
+      // add placeholders
+      placeholder: {
+        number: "4111 1111 1111 1111"
+      },
+    
+      // Set locale
+      locale: 'en',
+    
+      style: {
+    
+        // Styles for default state
+        base: {
+          color: '#1d1e54',
+          fontWeight: '500',
+          fontFamily: 'Roboto, Segoe UI, Helvetica Neue, sans-serif',
+          fontSize: '16px',
+          fontSmoothing: 'antialiased',
+    
+          ':focus': {
+            // color: '#424770',
+          },
+    
+          '::placeholder': {
+            color: 'transparent',
+          },
+    
+          ':focus::placeholder': {
+            color: '#9fa1d3',
+          },
+        },
+    
+        // Styles for invalid state
+        invalid: {
+          color: '#E94745',
+    
+          ':focus': {
+            color: '#f38a88',
+          },
+          '::placeholder': {
+            color: '#f38a88',
+          },
+        },
+      },
+    }
+  </script>
+  <script src="app.js"></script>
+</body>
+<script src="/menu-loader.js"></script>
+</html>
