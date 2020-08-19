@@ -630,7 +630,7 @@
                 "symfony/console": "~4.0",
                 "symfony/debug": "~4.0",
                 "symfony/finder": "~4.0",
-                "symfony/http-foundation": "~4.0",
+                "symfony/http-foundation": "4.2.12",
                 "symfony/http-kernel": "~4.0",
                 "symfony/process": "~4.0",
                 "symfony/routing": "~4.0",
