@@ -22,7 +22,7 @@
             },
             "require": {
                 "php": ">=5.5.9",
-                "symfony/http-foundation": "~2.7|~3.0|~4.0",
+                "symfony/http-foundation": "~2.7|~3.0|4.2.12",
                 "symfony/http-kernel": "~2.7|~3.0|~4.0"
             },
             "require-dev": {
@@ -76,7 +76,7 @@
                 "asm89/stack-cors": "^1.2",
                 "illuminate/support": "5.3.x|5.4.x|5.5.x|5.6.x",
                 "php": ">=5.5.9",
-                "symfony/http-foundation": "^3.1|^4",
+                "symfony/http-foundation": "^3.1|4.2.12",
                 "symfony/http-kernel": "^3.1|^4"
             },
             "require-dev": {
@@ -1753,7 +1753,7 @@
         },
         {
             "name": "symfony/http-foundation",
-            "version": "v4.0.4",
+            "version": "v4.2.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
@@ -1823,7 +1823,7 @@
                 "psr/log": "~1.0",
                 "symfony/debug": "~3.4|~4.0",
                 "symfony/event-dispatcher": "~3.4|~4.0",
-                "symfony/http-foundation": "~3.4.4|~4.0.4"
+                "symfony/http-foundation": "~3.4.4|4.2.12"
             },
             "conflict": {
                 "symfony/config": "<3.4",
@@ -2082,7 +2082,7 @@
                 "symfony/config": "~3.4|~4.0",
                 "symfony/dependency-injection": "~3.4|~4.0",
                 "symfony/expression-language": "~3.4|~4.0",
-                "symfony/http-foundation": "~3.4|~4.0",
+                "symfony/http-foundation": "~3.4|4.2.12",
                 "symfony/yaml": "~3.4|~4.0"
             },
             "suggest": {
