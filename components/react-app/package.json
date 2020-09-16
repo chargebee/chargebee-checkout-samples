@@ -7,9 +7,9 @@
     "@chargebee/chargebee-js-react-wrapper": "^0.1.4",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-router": "^5.0.0",
-    "react-router-dom": "^5.0.0",
-    "react-scripts": "2.1.8"
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "^3.4.3"
   },
   "scripts": {
     "start": "react-scripts start",
