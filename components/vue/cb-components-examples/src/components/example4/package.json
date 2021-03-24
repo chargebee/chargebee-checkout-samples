@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "core-js": "^3.8.3",
-    "nuxt": "^2.14.12"
+    "nuxt": "^2.14.12",
+    "@chargebee/chargebee-js-vue-wrapper": "^0.2.2"
   },
   "devDependencies": {}
 }
