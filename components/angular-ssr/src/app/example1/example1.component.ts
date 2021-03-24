@@ -77,7 +77,7 @@ export class Example1Component {
   constructor() { }
 
   ngAfterContentInit() {
-    if (window != undefined) {
+    if (typeof window !== 'undefined') {
       window['Chargebee'].init({
         site: 'honeycomics-v3-test',
         publishableKey: 'test_qoH22RugUvm5IcxoqUD5Svdcu9mX5figf'
