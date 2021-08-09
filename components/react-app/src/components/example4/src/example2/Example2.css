@@ -1,0 +1,154 @@
+:root {
+    --main-bg: #262E3A;
+    --secondary-bg: #3e4b5b;
+    --main-text: #fff;
+    --placeholder: #939aa3;
+    --placeholder-focused: #ccc;
+    --primary-btn: #6EEDB6;
+    --btn-text: #1C2026;
+    --primary-btn-focus: rgb(70, 203, 145);
+  }
+  
+  body{
+    background-color: #2c2e33;  
+    color: #252857;
+    font-family: 'Raleway',-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+    font-size: 16px;
+    line-height: 1.4;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+  }
+  
+  body{
+    background: var(--main-bg);  
+    color: var(--main-text);
+    font-family: 'Lato',-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+    font-size: 16px;
+    line-height: 1.4;
+    font-weight: 300;
+    /* -webkit-font-smoothing: antialiased; */
+  }
+  
+  a{
+    cursor: pointer;
+    color: inherit;  
+    text-decoration: none;
+    border-bottom: 1px dotted;
+  }
+  
+  .ex2.container {
+    margin: auto;
+    padding: 100px 0;
+    min-height: 100vh;
+    background: var(--main-bg)
+  }
+  
+  .ex2-wrap{
+    max-width: 480px;
+    margin: auto;    
+  }
+  
+  .ex2-field{
+    position: relative;
+    margin-bottom: 16px;
+    display: flex;
+    background: var(--secondary-bg);
+    border-radius: 4px;
+    align-items: center;
+  }
+  
+  .ex2-label{  
+    font-size: 14px;
+    font-weight: 500;  
+    color: var(--main-text);    
+    flex-basis: 80px;
+    padding: 4px 0 4px 16px;
+  }
+  
+  .ex2-input{
+    width: 100%;
+    display: block;
+    background: transparent;
+    border-radius: 0;
+    border: none;
+    padding: 16px;  
+    border-width: 0;
+    border-color: transparent;
+    color: var(--main-text);
+    font-size: 16px;
+    font-family: inherit;
+    font-weight: 500;
+    transition: .2s;
+    cursor: text;
+    /* font-weight: inherit; */
+    -webkit-transition: all 0.28s ease;
+    transition: all 0.28s ease;
+    box-shadow: none;
+  }
+  
+  .ex2-input::placeholder{
+    color: var(--placeholder);
+  }
+  
+  .ex2-input:focus::placeholder{
+    color: var(--placeholder-focused);
+  }
+  
+  .ex2-button{
+    background: var(--primary-btn);
+    color: var(--btn-text);
+    font-size: 16px;
+    font-weight: 600;
+    font-family: inherit;
+    border: none;
+    border-radius: 4px;  
+    padding: 16px 20px;
+    display: block;
+    width: 100%;
+    letter-spacing: .5px;
+    transition: .2s;
+    cursor: pointer;
+  }
+  .ex2-button:hover,
+  .ex2-button:focus{
+    background: var(--primary-btn-focus)
+  }
+  
+  .ex2-button.submit {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic3ZnLWxvYWRlciIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNTUiIGhlaWdodD0iNTUiIHZpZXdCb3g9IjAgMCA4MCA4MCI+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTQwIDcyQzIyLjQgNzIgOCA1Ny42IDggNDBTMjIuNCA4IDQwIDhzMzIgMTQuNCAzMiAzMmMwIDEuMS0uOSAyLTIgMnMtMi0uOS0yLTJjMC0xNS40LTEyLjYtMjgtMjgtMjhTMTIgMjQuNiAxMiA0MHMxMi42IDI4IDI4IDI4YzEuMSAwIDIgLjkgMiAycy0uOSAyLTIgMnoiPjxhbmltYXRlVHJhbnNmb3JtIGF0dHJpYnV0ZVR5cGU9InhtbCIgYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIiB0eXBlPSJyb3RhdGUiIGZyb209IjAgNDAgNDAiIHRvPSIzNjAgNDAgNDAiIGR1cj0iMC42cyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiLz48L3BhdGg+PC9zdmc+);
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: 20px;
+    color: transparent!important;
+    transition-duration: 0s;
+  }
+  
+  #error, #token {
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .theme-palette {
+    display: flex;
+    margin-top: 20px;
+  }
+  
+  .theme-palette > .ex2-button {
+    margin: 0 10px;
+    padding: 5px 10px;
+    height: 50%;
+    font-size: 14px;
+  }
+  
+  .title {
+    color: var(--main-text);
+    margin-top: 30px;
+  }
+  
