@@ -74,6 +74,18 @@ app.post("/api/generate_portal_session", (req, res) => {
   });
 });
 
+app.post('/api/generate_payment_intent', (req, res) => {
+  chargebee.payment_intent.create(req.body)
+  .request(function(error,result) {
+      if(error){
+          res.status(error.http_status_code || 500);
+          res.json(error);
+      } else{
+          res.json(result);
+      }
+  });
+});
+
 app.get('/', (req, res) => res.send('Hello World!'))
 
 app.listen(8000, () => console.log('Example app listening on port 8000!'))
