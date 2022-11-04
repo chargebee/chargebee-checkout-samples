@@ -19,7 +19,6 @@
     "@angular/platform-browser": "~11.2.14",
     "@angular/platform-browser-dynamic": "~11.2.14",
     "@angular/router": "~11.2.14",
-    "@chargebee/chargebee-js-angular-wrapper": "^0.2.0",
     "core-js": "^3.6.5",
     "rxjs": "~6.6.3",
     "tslib": "^2.0.0",
