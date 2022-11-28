@@ -42,6 +42,10 @@ export default class Example1 extends Component {
             ':focus::placeholder': {
               color: '#7b808c',
             },
+
+            ':-webkit-autofill': {
+              webkitTextColor: '#333',
+            }
           },
       
           // Styles for invalid field state
