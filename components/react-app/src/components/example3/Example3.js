@@ -48,6 +48,10 @@ export default class Example1 extends Component {
             ':focus::placeholder': {
               color: '#666',
             },
+
+            ':-webkit-autofill': {
+              webkitTextColor: '#2a2d5b',
+            }
           },
           invalid: {
             color: '#e41029',

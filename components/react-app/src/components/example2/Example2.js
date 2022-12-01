@@ -77,6 +77,10 @@ export default class Example2 extends Component {
         ':focus::placeholder': {
           color: theme['placeholder-focused'],
         },
+
+        ':-webkit-autofill': {
+          webkitTextColor: theme['main-text'],
+        }
       },
       invalid: {
         color: theme['invalid'] || '#FF7C4A',
