@@ -13,4 +13,9 @@ export default defineConfig({
     },
     // dedupe: ["vue"]
   },
+  server: {
+    fs: {
+      allow: ["/Users/cbit011058/Projects/Chargebee/"],
+    }
+  },
 });
