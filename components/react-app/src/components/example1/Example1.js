@@ -121,6 +121,9 @@ export default class Example1 extends Component {
             locale={locale}
             placeholder={placeholder}
             fonts={fonts}
+            onEscape={() => {
+              console.log("Pressed ESC key");
+            }}
           >
             <div className="ex1-field">
               {/* Card number component */}

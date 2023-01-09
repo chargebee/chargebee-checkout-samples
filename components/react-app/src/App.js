@@ -9,8 +9,9 @@ class App extends Component {
   constructor(props) {
     super(props)
     window.Chargebee.init({
-      site: "honeycomics-v3-test",
-      publishableKey: "test_qoH22RugUvm5IcxoqUD5Svdcu9mX5figf"
+      site: "mannar-test",
+      domain: "http://mannar-test.localcb.in:8080/",
+      publishableKey: "test___dev__eZSpoLTEeykvCIfU9EOospwczgQLlGhJ"
     })
   }
 
