@@ -102,6 +102,14 @@ export default class Example1 extends Component {
     });
   }
 
+  onEscapeParent = () => {
+    console.log("On Escape - Parent");
+  }
+
+  onEscapeChild = () => {
+    console.log("On Escape - Child");
+  }
+
   render() {
     const { style, classes, locale, placeholder, fonts } = this.state.options;
     return (
@@ -121,13 +129,11 @@ export default class Example1 extends Component {
             locale={locale}
             placeholder={placeholder}
             fonts={fonts}
-            onEscape={() => {
-              console.log("Pressed ESC key");
-            }}
+            onEscape={this.onEscapeParent}
           >
             <div className="ex1-field">
               {/* Card number component */}
-              <CardNumber className="ex1-input"/>
+              <CardNumber className="ex1-input" />
               <label className="ex1-label">Card Number</label><i className="ex1-bar"></i>
             </div>
 

@@ -157,6 +157,10 @@ export default class Example2 extends Component {
     this.cardRef.current.focus();
   }
 
+  onEscape = (event) => {
+    console.log('Esc key pressed');
+  }
+
   render() {
     const { cardIcon, styles, classes } = this.state;
     return (
@@ -182,6 +186,7 @@ export default class Example2 extends Component {
                 icon={cardIcon}
                 styles={styles}
                 classes={classes} 
+                onEscape={this.onEscape}
               />
             </label>
           </div>
