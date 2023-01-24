@@ -129,10 +129,7 @@ export default class Example1 extends Component {
             locale={locale}
             placeholder={placeholder}
             fonts={fonts}
-<<<<<<< HEAD
             onEscape={this.onEscapeParent}
-=======
->>>>>>> parent of 1dc3f24 (initial changes)
           >
             <div className="ex1-field">
               {/* Card number component */}
