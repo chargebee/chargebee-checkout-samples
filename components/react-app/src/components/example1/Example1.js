@@ -102,14 +102,6 @@ export default class Example1 extends Component {
     });
   }
 
-  onEscapeParent = () => {
-    console.log("On Escape - Parent");
-  }
-
-  onEscapeChild = () => {
-    console.log("On Escape - Child");
-  }
-
   render() {
     const { style, classes, locale, placeholder, fonts } = this.state.options;
     return (

@@ -157,10 +157,6 @@ export default class Example2 extends Component {
     this.cardRef.current.focus();
   }
 
-  onEscape = (event) => {
-    console.log(event);
-  }
-
   render() {
     const { cardIcon, styles, classes } = this.state;
     return (
