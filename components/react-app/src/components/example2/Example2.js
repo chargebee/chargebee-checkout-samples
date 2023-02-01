@@ -182,6 +182,7 @@ export default class Example2 extends Component {
                 icon={cardIcon}
                 styles={styles}
                 classes={classes} 
+                onKeyPress={(event) => console.log(event)}
               />
             </label>
           </div>

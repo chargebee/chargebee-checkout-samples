@@ -121,10 +121,11 @@ export default class Example1 extends Component {
             locale={locale}
             placeholder={placeholder}
             fonts={fonts}
+            onKeyPress={(event) => console.log(event)}
           >
             <div className="ex1-field">
               {/* Card number component */}
-              <CardNumber className="ex1-input"/>
+              <CardNumber className="ex1-input" />
               <label className="ex1-label">Card Number</label><i className="ex1-bar"></i>
             </div>
 
