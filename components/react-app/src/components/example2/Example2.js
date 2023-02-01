@@ -158,7 +158,7 @@ export default class Example2 extends Component {
   }
 
   onEscape = (event) => {
-    console.log('Esc key pressed');
+    console.log(event);
   }
 
   render() {
@@ -186,7 +186,7 @@ export default class Example2 extends Component {
                 icon={cardIcon}
                 styles={styles}
                 classes={classes} 
-                onEscape={this.onEscape}
+                onKeyPress={(event) => console.log(event)}
               />
             </label>
           </div>

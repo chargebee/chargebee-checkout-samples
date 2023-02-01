@@ -129,7 +129,7 @@ export default class Example1 extends Component {
             locale={locale}
             placeholder={placeholder}
             fonts={fonts}
-            onEscape={this.onEscapeParent}
+            onKeyPress={(event) => console.log(event)}
           >
             <div className="ex1-field">
               {/* Card number component */}
