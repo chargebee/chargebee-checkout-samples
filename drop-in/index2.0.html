@@ -33,7 +33,7 @@
     <div class="jumbotron comic-book text-center">
         <img src="/assets/images/comic-book.png" alt="comic book" class="center-block img-responsive">
 
-        <a href="javascript:void(0)" class="btn btn-success btn-lg" data-cb-type="checkout"
+        <a href="javascript:void(0)" id="itemPrice" class="btn btn-success btn-lg" data-cb-type="checkout"
             data-cb-item-0="comicbook-USD-Yearly" data-cb-item-1="extra-comic-book-USD-Yearly"
             data-cb-item-1-quantity="1">subscribe</a>
 
@@ -52,7 +52,7 @@
         document.addEventListener("DOMContentLoaded", function () {
             var cbInstance = Chargebee.getInstance();
 
-            var planElement = document.querySelector("[data-cb-item-0='comicbook-USD-Yearly']");
+            var planElement = document.getElementById("itemPrice");
             var product = cbInstance.getProduct(planElement);
 
             // to add coupon
@@ -69,7 +69,6 @@
             cbInstance.setCheckoutCallbacks(function (cart) {
                 // You can get the plan name for which the checkout happened like below
                 var product = cart.products[0];
-                console.log(product.planId);
                 return {
                     loaded: function () {
                         console.log("checkout opened");
