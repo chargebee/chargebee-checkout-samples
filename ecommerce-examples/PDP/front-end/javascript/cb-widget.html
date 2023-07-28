@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PDP Widget</title>
+    <style>
+      body {
+        min-height: 100vh;
+      }
+      /* 
+        CSS Variables - Configure styling by modifying these variables
+      */
+      .cb-widget-container {
+        --cb-font-family: system-ui, -apple-system, BlinkMacSystemFont,
+          'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
+          'Helvetica Neue', sans-serif;
+        --cb-font-size: 14px;
+        --cb-font-color: #012a38;
+        --cb-border-radius: 4px;
+        --cb-box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;
+        --cb-widget-bg: #fff;
+        --cb-cta-bg: #012a38;
+        --cb-cta-text: #fff;
+        --cb-variant-bg: #fff;
+        --cb-variant-active-bg: #137cb6;
+        --cb-variant-border: 1px solid #012a38;
+      }
+      .cb-loading-container {
+        text-align: center;
+        margin-top: 180px;
+      }
+      .cb-button-disabled {
+        pointer-events: none;
+        cursor: not-allowed;
+        opacity: 0.5;
+      }
+      .cb-widget-container {
+        position: fixed;
+        min-height: 400px;
+        width: 400px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        max-width: 400px;
+        padding: 30px 20px;
+        border: 1px solid #ccc;
+        border-radius: var(--cb-border-radius);
+        font-family: var(--cb-font-family);
+        font-size: var(--cb-font-size);
+        color: var(--cb-font-color);
+        box-shadow: var(--cb-box-shadow);
+        background-color: var(--cb-widget-bg);
+      }
+      .cb-widget-title {
+        margin-top: 0;
+      }
+      .cb-variant-select-wrapper,
+      .cb-frequency-select,
+      .cb-frequency-select select,
+      .cb-quantity {
+        margin-bottom: 10px;
+      }
+      .cb-quantity {
+        padding-top: 20px;
+      }
+      .cb-quantity label {
+        margin-right: 20px;
+      }
+      .cb-quantity button {
+        border: none;
+        padding: 5px 10px;
+      }
+      .cb-quantity-wrapper {
+        display: inline-block;
+        border: 1px solid gray;
+      }
+      .cb-quantity-wrapper span {
+        margin: 0 15px;
+      }
+      .cb-frequency-select select,
+      .cb-variant-select {
+        display: block;
+        margin-top: 10px;
+        width: 100%;
+        height: 36px;
+        padding: 5px;
+        border-radius: var(--cb-border-radius);
+      }
+      .cb-cta-button {
+        padding: 10px 20px;
+        background-color: var(--cb-cta-bg);
+        color: var(--cb-cta-text);
+        border-radius: var(--cb-border-radius);
+        text-decoration: none;
+        display: block;
+        text-align: center;
+        margin-top: 10px;
+      }
+      .cb-variant-selector {
+        padding: 10px 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+      }
+      .cb-variant-selector button {
+        margin-top: 10px;
+        padding: 10px 16px;
+        border-radius: var(--cb-border-radius);
+        border: var(--cb-variant-border);
+        background: var(--cb-variant-bg);
+        cursor: pointer;
+      }
+      .cb-variant-selector button.active {
+        background: var(--cb-variant-active-bg);
+        color: #fff;
+        border: 0;
+      }
+      .cb-cta-container {
+        margin-top: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Widget Wrapper Container starts -->
+    <div class="cb-widget-container">
+      <!-- Loading Container starts -->
+      <div class="cb-loading-container" style="display: block">Loading...</div>
+      <!-- Loading Container ends -->
+      <!-- Widget Main Container starts -->
+      <div class="cb-widget-loaded" style="display: none">
+        <!-- Widget Title -->
+        <h2 class="cb-widget-title">PDP Widget</h2>
+        <!-- Variant Selector starts -->
+        <div class="cb-variant-select-wrapper">
+          <label for="cb-variant">Select Variant:</label>
+          <div class="cb-variant-selector">
+            <button class="cb-variant">Variant 1</button>
+            <button class="cb-variant">Variant 2</button>
+            <button class="cb-variant">Variant 3</button>
+          </div>
+        </div>
+        <!-- Variant Selector ends -->
+        <!-- Frequency Selector starts -->
+        <div class="cb-frequency-select">
+          <label for="cb-frequency">Choose Purchase Option:</label>
+          <select id="cb-frequency">
+            <option value="monthly">Monthly</option>
+            <option value="quarterly">Quarterly</option>
+            <option value="annually">Annually</option>
+          </select>
+        </div>
+        <!-- Frequency Selector ends -->
+        <!-- Quantity Selector starts -->
+        <div class="cb-quantity">
+          <label for="cb-quantity-input">Quantity:</label>
+          <div class="cb-quantity-wrapper">
+            <button type="button" class="cb-decrement-btn">-</button>
+            <span id="cb-quantity-input">1</span>
+            <button type="button" class="cb-increment-btn">+</button>
+          </div>
+        </div>
+        <!-- Quantity Selector ends -->
+        <div class="cb-subs-description"></div>
+        <!-- CTA Wrapper starts -->
+        <div class="cb-cta-container">
+          <!-- Add click event for Add to Cart to add your cart logic -->
+          <a class="cb-cta-button" id="cb-add-to-cart" href="javascript:void(0)"
+            >Add to Cart</a
+          >
+          <a
+            class="cb-cta-button"
+            id="cb-checkout"
+            href="javascript:void(0)"
+            data-cb-type="checkout"
+            data-cb-item-0=""
+            data-cb-item-0-quantity="1"
+            >Subscribe Now</a
+          >
+        </div>
+        <!-- CTA Wrapper ends -->
+      </div>
+      <!-- Widget Main Container ends -->
+    </div>
+    <!-- Widget Wrapper Container ends -->
+    <script src="/static/cb-widget.js"></script>
+  </body>
+</html>
