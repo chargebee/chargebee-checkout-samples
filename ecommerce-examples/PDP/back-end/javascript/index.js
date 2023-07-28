@@ -7,8 +7,8 @@ const fetch = require('node-fetch');
 const cors = require('cors');
 
 chargebee.configure({
-  site: 'pc-pim-test', // Enter your Side ID here
-  api_key: 'test_PYwqzG6AlNRLDlmIzVTvz1iN97C6O0VZ' // Enter your publishable API key here
+  site: 'SITE_ID', // Enter your Side ID here
+  api_key: 'API_KEY' // Enter your publishable API key here
 });
 const app = express();
 

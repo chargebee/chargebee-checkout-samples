@@ -38,9 +38,9 @@ const CbWidget = {
     };
     // Fetch APIs required to populate data in widgetData
     await this.retrieveData();
-    // Use the data and options provided to construct the widget
+    // Use the data and options provided to construct the widget data
     this.constructWidgetData();
-    // Render the widget on the page
+    // Using the widgetData render the widget on the page
     this.renderWidget();
     // Trigger click/change event on Variant selector to pre-select the first Variant by default
     if (this.options.variantSelector === 'button') {
@@ -67,6 +67,7 @@ const CbWidget = {
   },
   retrieveData: async function () {
     let error = null;
+    // Fetch Variant, Plans, Charges info
     const [variants, subscriptionPlans, oneTimeCharges] = await Promise.all([
       this.fetchCBApi('/api/variants?product_id=' + this.options.product_id),
       this.fetchCBApi(
@@ -78,14 +79,17 @@ const CbWidget = {
           '&type=charge'
       )
     ]).catch((err) => {
+      // Show Error message on the widget
       this.showError();
       console.error(err);
       error = err;
     });
+    // Fetch Subscription price and one time prices
     const [subscriptionPrices, oneTimePrices] = await Promise.all([
       this.fetchCBApi('/api/fetch-item-prices?item_id=' + subscriptionPlans.id),
       this.fetchCBApi('/api/fetch-item-prices?item_id=' + oneTimeCharges.id)
     ]).catch((err) => {
+      // Show Error message on the widget
       this.showError();
       console.log(err);
       error = err;
@@ -93,9 +97,11 @@ const CbWidget = {
     if (error) {
       return;
     }
+    // Hide loading message and display the Widget content
     this.inited = true;
     this.selectors.loadingContainer.style.display = 'none';
     this.selectors.loadedContainer.style.display = 'block';
+    // Populate the fetched data into the appropriate placeholders for easy reference
     this.variants = variants.list;
     this.prices.subscriptionPrices = subscriptionPrices;
     this.prices.oneTimePrices = oneTimePrices;
@@ -110,7 +116,9 @@ const CbWidget = {
     });
   },
   renderWidget: function () {
+    // Construct Variant Selector
     this.selectors.variantSelector.innerHTML = '';
+    // Filter the variants that have atleast one price configured
     const filteredVariants = Object.keys(this.widgetData).filter(
       (variantId) => {
         const variant = this.widgetData[variantId];
@@ -119,16 +127,19 @@ const CbWidget = {
         );
       }
     );
+    // If the variant selector is configured as Select, Create Select containers
     if (this.options.variantSelector === 'select') {
       const select = document.createElement('select');
       select.classList = ['cb-variant-select'];
       this.selectors.variantSelector.appendChild(select);
+      // Each Variants have unique set of Frequency prices, Change frequencies whenever Variant is changed
       select.addEventListener('change', (e) => {
         this.populateFrequencies(e);
       });
     }
     filteredVariants.forEach((variantId, index) => {
       const variant = this.widgetData[variantId];
+      // Create button containers if the variant selector is configured as Buttons
       if (this.options.variantSelector === 'button') {
         const button = document.createElement('button');
         button.value = variant.id;
@@ -137,6 +148,7 @@ const CbWidget = {
           button.className = 'active';
         }
         this.selectors.variantSelector.appendChild(button);
+        // Each Variants have unique set of Frequency prices, Change frequencies whenever Variant is changed
         button.addEventListener('click', (e) => {
           this.populateFrequencies(e);
         });
@@ -151,7 +163,9 @@ const CbWidget = {
     });
   },
   populateFrequencies: function (e) {
+    // Get the Variant Id
     const variantId = e.target.value;
+    // Toggle the active class to highlight the selected Variant in the UI
     if (this.options.variantSelector === 'button') {
       document.querySelector('.cb-variant-select-wrapper .active').className =
         '';
@@ -159,12 +173,14 @@ const CbWidget = {
     }
     const frequencySelector = document.querySelector('#cb-frequency');
     let frequencies = [];
+    // Check if there are One time prices and populate them first
     const oneTime = this.widgetData[variantId].oneTimePrices?.find((price) => {
       return price.currency_code === this.options.currency;
     });
     if (oneTime) {
       frequencies.push(oneTime);
     }
+    // Check if there are Subscription prices and populate them
     const subscriptions = this.widgetData[variantId].subscriptionPrices?.filter(
       (price) => {
         return price.currency_code === this.options.currency;
@@ -174,6 +190,7 @@ const CbWidget = {
       frequencies = [...frequencies, ...subscriptions];
     }
     frequencySelector.innerHTML = '';
+    // After populating the prices and frequencies, build the Frequency selector
     frequencies.forEach((frequency) => {
       const option = document.createElement('option');
       option.value = frequency.id;
@@ -185,6 +202,7 @@ const CbWidget = {
     });
     document.querySelector('#cb-checkout').dataset['cbItem-0'] =
       frequencies[0].id;
+    // Change the Subscribe now link with the selected checkout link
     document.querySelector(
       '#cb-checkout'
     ).href = `https://${this.options.site_id}.chargebee.com/hosted_pages/checkout?subscription_items[item_price_id][0]=${frequencies[0].id}&subscription_items[quantity][0]=${this.quantity}&layout=in_app`;
@@ -222,8 +240,9 @@ const CbWidget = {
   }
 };
 CbWidget.init({
-  site_id: 'pc-pim-test',
-  product_id: 'HRX-Shirt', //'PIM-UI-Release',
-  variantSelector: 'select',
-  currency: 'USD'
+  site_id: 'SITE_ID',
+  customer_id: 'CUSTOMER_ID',
+  product_id: 'PRODUCT_ID',
+  variantSelector: 'select', // select/button
+  currency: 'USD' // 'USD', 'EUR', etc.,
 });
