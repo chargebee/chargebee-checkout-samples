@@ -25,8 +25,8 @@ const CbWidget = {
     variantSelector: document.getElementsByClassName('cb-variant-selector')[0]
   },
   // Utility to make API call to your backend
-  fetchCBApi: async function (url) {
-    const response = await fetch(url);
+  fetchCBApi: async function (url, options = {}) {
+    const response = await fetch(url, options);
     return response.json();
   },
   // initialize CbWidget. Entry point to get started
@@ -63,6 +63,11 @@ const CbWidget = {
     }
     if (!this.options.showSubscribeNow) {
       this.toggleBlock('#cb-checkout', true);
+    } else {
+      // Add event handler for Subscribe now
+      document
+        .querySelector('#cb-checkout')
+        .addEventListener('click', (e) => this.subscribeNow(e));
     }
   },
   retrieveData: async function () {
@@ -200,25 +205,33 @@ const CbWidget = {
       option.dataset.description = frequency.description || '';
       frequencySelector.appendChild(option);
     });
-    document.querySelector('#cb-checkout').dataset['cbItem-0'] =
-      frequencies[0].id;
-    // Change the Subscribe now link with the selected checkout link
-    document.querySelector(
-      '#cb-checkout'
-    ).href = `https://${this.options.site_id}.chargebee.com/hosted_pages/checkout?subscription_items[item_price_id][0]=${frequencies[0].id}&subscription_items[quantity][0]=${this.quantity}&layout=in_app`;
-    frequencySelector.addEventListener('change', this.changeFrequency);
+    frequencySelector.addEventListener('change', (e) => {
+      this.changeFrequency(e);
+    });
     document.querySelector('#cb-frequency').dispatchEvent(new Event('change'));
   },
   changeFrequency: function (e) {
+    this.widgetData.selectedFrequency = e.target.value;
     const subsDescription = document.querySelector('.cb-subs-description');
     subsDescription.innerHTML = '';
     const desc = document.querySelector(
       '#cb-frequency [value=' + e.target.value + ']'
     )?.dataset?.description;
     subsDescription.innerHTML = desc ? desc : '';
-    document.querySelector(
-      '#cb-checkout'
-    ).href = `https://${this.options.site_id}.chargebee.com/hosted_pages/checkout?subscription_items[item_price_id][0]=${e.target.value}&subscription_items[quantity][0]=${this.quantity}&layout=in_app`;
+  },
+  subscribeNow: async function (e) {
+    e.preventDefault();
+    try {
+      const checkout = await this.fetchCBApi(
+        `/api/generate_checkout_new_url?subscription_items[item_price_id][0]=${this.widgetData.selectedFrequency}&subscription_items[quantity][0]=${this.quantity}&customer[id]=${this.options.customer_id}`,
+        {
+          method: 'POST'
+        }
+      );
+      window.location.href = checkout.url;
+    } catch (e) {
+      console.error(e);
+    }
   },
   quantityModifier: function (count) {
     if (this.quantity + count > 0) {

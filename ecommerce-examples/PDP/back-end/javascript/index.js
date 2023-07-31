@@ -5,10 +5,12 @@ const fetch = require('node-fetch');
 
 // CORS is enabled only for demo. Please dont use this in production unless you know about CORS
 const cors = require('cors');
+const siteName = 'SITE_ID';
+const API_KEY = 'API_KEY';
 
 chargebee.configure({
-  site: 'SITE_ID', // Enter your Side ID here
-  api_key: 'API_KEY' // Enter your publishable API key here
+  site: siteName, // Enter your Side ID here
+  api_key: API_KEY // Enter your publishable API key here
 });
 const app = express();
 
@@ -84,9 +86,7 @@ app.get('/api/variants', async (req, res) => {
     `https://${siteName}.chargebee.com/api/v2/products/${req.query.product_id}/variants`,
     {
       headers: {
-        Authorization: `Basic ${Buffer.from(
-          'test_PYwqzG6AlNRLDlmIzVTvz1iN97C6O0VZ'
-        ).toString('base64')}`
+        Authorization: `Basic ${Buffer.from(API_KEY).toString('base64')}`
       }
     }
   );
@@ -96,6 +96,27 @@ app.get('/api/variants', async (req, res) => {
     variants.push(variant);
   }
   res.status(200).json({ list: variants });
+});
+
+/* 
+  Fetch Checkout Link
+  request params - Item Price ID, Customer ID (optional)
+*/
+app.post('/api/generate_checkout_new_url', async (req, res) => {
+  try {
+    chargebee.hosted_page
+      .checkout_new_for_items(req.query)
+      .request(function (error, result) {
+        if (error) {
+          //handle error
+          console.log(error);
+        } else {
+          res.send(result.hosted_page);
+        }
+      });
+  } catch (e) {
+    console.log(e);
+  }
 });
 
 // Configure the path of your HTML file to be loaded
