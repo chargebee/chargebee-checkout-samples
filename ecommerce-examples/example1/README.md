@@ -2,6 +2,9 @@
 
 A PDP (Product Detail Page) widget is a user interface element designed to showcase specific product information and options to customers on an e-commerce website. In this demo PDP widget, the focus is on providing options related to product variants, subscription frequency, quantity, and actions such as "Add to Cart" and "Subscribe Now." It allows customers to interact with the widget and choose their preferred options before making a purchase or subscribing to the product.
 
+<img width="813" alt="image" src="https://github.com/chargebee/chargebee-checkout-samples/assets/79129687/7dca3a9a-ddae-495c-ba47-15ad6bc233fa">
+
+
 ## Prerequisite
 
 - Install Node js version 14 or above.
