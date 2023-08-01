@@ -12,7 +12,6 @@ module.exports = (req, res) => {
           ...req.query,
           item_prices: req.query.subscription_items
         };
-    console.log(isPlan, params);
     checkoutCallback(params).request(function (error, result) {
       if (error) {
         //handle error
