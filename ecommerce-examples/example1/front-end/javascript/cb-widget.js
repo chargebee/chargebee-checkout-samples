@@ -211,7 +211,12 @@ const CbWidget = {
     document.querySelector('#cb-frequency').dispatchEvent(new Event('change'));
   },
   changeFrequency: function (e) {
-    this.widgetData.selectedFrequency = e.target.value;
+    this.widgetData.selectedFrequency = {
+      id: e.target.value,
+      type: e.target.value?.endsWith(`-Charge-${this.options.currency}`)
+        ? 'charge'
+        : 'plan'
+    };
     const subsDescription = document.querySelector('.cb-subs-description');
     subsDescription.innerHTML = '';
     const desc = document.querySelector(
@@ -223,7 +228,7 @@ const CbWidget = {
     e.preventDefault();
     try {
       const checkout = await this.fetchCBApi(
-        `/api/generate_checkout_new_url?subscription_items[item_price_id][0]=${this.widgetData.selectedFrequency}&subscription_items[quantity][0]=${this.quantity}&customer[id]=${this.options.customer_id}`,
+        `/api/generate_checkout_new_url?subscription_items[item_price_id][0]=${this.widgetData.selectedFrequency.id}&subscription_items[quantity][0]=${this.quantity}&customer[id]=${this.options.customer_id}&currency_code=${this.options.currency}&item_type=${this.widgetData.selectedFrequency.type}`,
         {
           method: 'POST'
         }
