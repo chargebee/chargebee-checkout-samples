@@ -1,13 +1,15 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from  '@angular/common/http';
 
 import { AppComponent } from './app.component';
-
-
+import { PricingSection } from './pricing-section/pricing-section.component';
+import { ManageAccount } from './manage-account/manage-account.component';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PricingSection,
+    ManageAccount,
   ],
   imports: [
     BrowserModule,
