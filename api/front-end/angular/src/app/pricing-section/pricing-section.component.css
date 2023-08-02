@@ -1,0 +1,42 @@
+.pricing-container {
+  display: flex;
+  padding: 30px 0;
+}
+
+.pricing-card {
+  background-color: lightgray;
+  border-radius: 35px;
+  padding: 30px 30px;
+  margin: 0 15px;
+}
+
+.pricing-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.pricing-amount {
+  padding: 15px 0;
+  font-size: 2rem;
+  font-weight: lighter;
+}
+
+.pricing-description {
+  font-size: 0.9rem;
+  font-weight: 300;
+  line-height: 1.3rem;
+}
+
+button {
+  margin: 20px 0;
+  padding: 10px 30px;
+  outline: 0;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #1976d2;
+  color: white;
+}
