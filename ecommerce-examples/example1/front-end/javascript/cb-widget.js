@@ -2,7 +2,6 @@
 const CbWidget = {
   inited: false,
   options: {
-    site_id: '', // Mandatory field - Site ID
     customer_id: '', // Optional
     product_id: '', // Mandatory
     variantSelector: 'select', // button/select
@@ -31,6 +30,9 @@ const CbWidget = {
   },
   // initialize CbWidget. Entry point to get started
   init: async function (options = {}) {
+    if (!options.product_id) {
+      alert('Kindly provide Product ID while initializing CbWidget!');
+    }
     // Override default options with the custom options
     this.options = {
       ...this.options,
@@ -199,10 +201,27 @@ const CbWidget = {
     frequencies.forEach((frequency) => {
       const option = document.createElement('option');
       option.value = frequency.id;
-      option.textContent = `${frequency.period_unit || 'One Time'} - ${
-        frequency.currency_code
-      } ${(frequency.price / 100).toFixed(2)}`;
-      option.dataset.description = frequency.description || '';
+      // Construct frequency text
+      let frequencyText = '';
+      if (frequency.period === 1) {
+        frequencyText = `Every ${frequency.period_unit}`;
+      } else {
+        frequencyText = `Every ${frequency.period} ${frequency.period_unit}s`;
+      }
+      option.textContent = `${
+        frequency.period_unit ? frequencyText : 'One Time'
+      } - ${frequency.currency_code} ${(frequency.price / 100).toFixed(2)}`;
+      // Construct Shipping text
+      let shippingText = '';
+      if (frequency.shipping_period) {
+        shippingText = `Delivers every ${
+          frequency.shipping_period === 1 ? '' : frequency.shipping_period
+        } `;
+        shippingText = `${shippingText.trim()} ${
+          frequency.shipping_period_unit
+        }${frequency.shipping_period === 1 ? '' : 's'}`;
+      }
+      option.dataset.description = `<div class="cb-delivery-interval">${shippingText}</div>${frequency.description || ''}`;
       frequencySelector.appendChild(option);
     });
     frequencySelector.addEventListener('change', (e) => {
@@ -219,7 +238,7 @@ const CbWidget = {
     };
     const subsDescription = document.querySelector('.cb-subs-description');
     subsDescription.innerHTML = '';
-    const desc = document.querySelector(
+    let desc = document.querySelector(
       '#cb-frequency [value=' + e.target.value + ']'
     )?.dataset?.description;
     subsDescription.innerHTML = desc ? desc : '';
@@ -258,7 +277,6 @@ const CbWidget = {
   }
 };
 CbWidget.init({
-  site_id: 'SITE_ID',
   customer_id: 'CUSTOMER_ID',
   product_id: 'PRODUCT_ID',
   variantSelector: 'select', // select/button
