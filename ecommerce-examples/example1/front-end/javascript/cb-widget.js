@@ -239,7 +239,7 @@ const CbWidget = {
     const subsDescription = document.querySelector('.cb-subs-description');
     subsDescription.innerHTML = '';
     let desc = document.querySelector(
-      '#cb-frequency [value=' + e.target.value + ']'
+      '#cb-frequency [value="' + e.target.value + '"]'
     )?.dataset?.description;
     subsDescription.innerHTML = desc ? desc : '';
   },
@@ -277,8 +277,8 @@ const CbWidget = {
   }
 };
 CbWidget.init({
-  customer_id: 'CUSTOMER_ID',
-  product_id: 'PRODUCT_ID',
+  customer_id: 'CUSTOMER_ID', // Replace with Customer id
+  product_id: 'PRODUCT_ID', // Replace with product id
   variantSelector: 'select', // select/button
   currency: 'USD' // 'USD', 'EUR', etc.,
 });

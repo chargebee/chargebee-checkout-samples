@@ -6,12 +6,20 @@ module.exports = (req, res) => {
       ? chargebee.hosted_page.checkout_new_for_items
       : chargebee.hosted_page.checkout_one_time_for_items;
     delete req.query.item_type;
-    const params = isPlan
-      ? req.query
-      : {
-          ...req.query,
-          item_prices: req.query.subscription_items
-        };
+    if (!req.query.customer.id) {
+      delete req.query.customer.id;
+    }
+    let params = null;
+    if (isPlan) {
+      params = req.query;
+    } else {
+      // For one time purchase, the subscription_items prop is replaced with item_prices
+      const {subscription_items, ...rest} = req.query
+      params = {
+        ...rest,
+        item_prices: subscription_items
+      }
+    }
     checkoutCallback(params).request(function (error, result) {
       if (error) {
         //handle error
