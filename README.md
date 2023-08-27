@@ -2,7 +2,7 @@
 
 This repository contains [Chargebee's checkout/portal examples](https://chargebee.com/docs/hosted-capabilities.html), to help you understand and explore the capabilities supported.
 
-If you are looking for Chargebee API examples please [checkout this repostory](https://github.com/chargebee/chargebee-samples).
+If you are looking for Chargebee API examples please [refer this repostory](https://github.com/chargebee/chargebee-samples).
 
 ## Documentation
 
