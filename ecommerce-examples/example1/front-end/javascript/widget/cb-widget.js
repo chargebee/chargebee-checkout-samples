@@ -62,6 +62,17 @@ const CbWidget = {
     // Show blocks based on the options provided
     if (!this.options.showAddToCart) {
       this.toggleBlock('#cb-add-to-cart', true);
+    } else {
+      document
+        .querySelector('#cb-add-to-cart')
+        .addEventListener('click', () => {
+          CbCart.addProductToCart({
+            itemId: this.widgetData.selectedFrequency.itemId,
+            itemPriceId: this.widgetData.selectedFrequency.id,
+            type: this.widgetData.selectedFrequency.type,
+            quantity: this.quantity
+          });
+        });
     }
     if (!this.options.showSubscribeNow) {
       this.toggleBlock('#cb-checkout', true);
@@ -201,6 +212,7 @@ const CbWidget = {
     frequencies.forEach((frequency) => {
       const option = document.createElement('option');
       option.value = frequency.id;
+      option.dataset.itemId = frequency.item_id;
       // Construct frequency text
       let frequencyText = '';
       if (frequency.period === 1) {
@@ -221,7 +233,9 @@ const CbWidget = {
           frequency.shipping_period_unit
         }${frequency.shipping_period === 1 ? '' : 's'}`;
       }
-      option.dataset.description = `<div class="cb-delivery-interval">${shippingText}</div>${frequency.description || ''}`;
+      option.dataset.description = `<div class="cb-delivery-interval">${shippingText}</div>${
+        frequency.description || ''
+      }`;
       frequencySelector.appendChild(option);
     });
     frequencySelector.addEventListener('change', (e) => {
@@ -232,7 +246,10 @@ const CbWidget = {
   changeFrequency: function (e) {
     this.widgetData.selectedFrequency = {
       id: e.target.value,
-      type: e.target.value?.endsWith(`-Charge-${this.options.currency}`)
+      itemId: document.querySelector(
+        '#cb-frequency [value="' + e.target.value + '"]'
+      )?.dataset?.itemId,
+      type: e.target.value?.endsWith(`-charge-${this.options.currency}`)
         ? 'charge'
         : 'plan'
     };
@@ -277,8 +294,8 @@ const CbWidget = {
   }
 };
 CbWidget.init({
-  customer_id: 'CUSTOMER_ID', // Replace with Customer id
-  product_id: 'PRODUCT_ID', // Replace with product id
+  customer_id: 'aras_shaffer', // Replace with Customer id
+  product_id: 'Soap', // Replace with product id
   variantSelector: 'select', // select/button
   currency: 'USD' // 'USD', 'EUR', etc.,
 });

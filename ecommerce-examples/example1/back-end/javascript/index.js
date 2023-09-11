@@ -5,11 +5,12 @@ const fetchItems = require('./fetch-items');
 const fetchItemPrices = require('./fetch-item-prices');
 const fetchVariants = require('./fetch-variants');
 const checkoutNew = require('./new-checkout');
+const estimates = require('./fetch-estimates');
+const purchases = require('./new-purchase');
+const { siteName, API_KEY } = require('./constants');
 
 // CORS is enabled only for demo. Please dont use this in production unless you know about CORS
 const cors = require('cors');
-const siteName = 'SITE_ID';
-const API_KEY = 'API_KEY';
 
 let credentialError = null;
 if (siteName === 'SITE_ID' || !siteName) {
@@ -60,10 +61,26 @@ app.get('/api/variants', async (req, res) => {
 */
 app.post('/api/generate_checkout_new_url', checkoutNew);
 
+/* 
+  Fetch Estimates for the Cart items
+*/
+app.post('/api/calculate_estimates', estimates);
+
+/* 
+  Create new purchase for the Cart items
+*/
+app.post('/api/purchase', purchases);
+
 // Configure the path of your HTML file to be loaded
 app.get('/', (req, res) => {
   res.sendFile(
-    path.join(__dirname, '../../front-end/javascript/cb-widget.html')
+    path.join(__dirname, '../../front-end/javascript/widget/cb-widget.html')
+  );
+});
+
+app.get('/cart', (req, res) => {
+  res.sendFile(
+    path.join(__dirname, '../../front-end/javascript/cart/cb-cart.html')
   );
 });
 
