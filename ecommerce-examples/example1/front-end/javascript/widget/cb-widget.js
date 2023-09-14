@@ -9,6 +9,7 @@ const CbWidget = {
     showAddToCart: true, // Display Add to Cart in your widget
     showSubscribeNow: true // Display Subscribe now in your widget
   },
+  productName: '',
   variants: [],
   quantity: 1,
   prices: {
@@ -54,10 +55,10 @@ const CbWidget = {
     }
     // Add event handlers for '-' and '+' buttons of Quantity selectors
     document
-      .querySelector('.cb-decrement-btn')
+      .querySelector('.cb-quantity .cb-decrement-btn')
       .addEventListener('click', () => this.quantityModifier(-1));
     document
-      .querySelector('.cb-increment-btn')
+      .querySelector('.cb-quantity .cb-increment-btn')
       .addEventListener('click', () => this.quantityModifier(1));
     // Show blocks based on the options provided
     if (!this.options.showAddToCart) {
@@ -70,7 +71,8 @@ const CbWidget = {
             itemId: this.widgetData.selectedFrequency.itemId,
             itemPriceId: this.widgetData.selectedFrequency.id,
             type: this.widgetData.selectedFrequency.type,
-            quantity: this.quantity
+            quantity: this.quantity,
+            pricingModel: this.widgetData.selectedFrequency.pricingModel
           });
         });
     }
@@ -86,22 +88,27 @@ const CbWidget = {
   retrieveData: async function () {
     let error = null;
     // Fetch Variant, Plans, Charges info
-    const [variants, subscriptionPlans, oneTimeCharges] = await Promise.all([
-      this.fetchCBApi('/api/variants?product_id=' + this.options.product_id),
-      this.fetchCBApi(
-        '/api/fetch-items?product_id=' + this.options.product_id + '&type=plan'
-      ),
-      this.fetchCBApi(
-        '/api/fetch-items?product_id=' +
-          this.options.product_id +
-          '&type=charge'
-      )
-    ]).catch((err) => {
-      // Show Error message on the widget
-      this.showError();
-      console.error(err);
-      error = err;
-    });
+    const [product, variants, subscriptionPlans, oneTimeCharges] =
+      await Promise.all([
+        this.fetchCBApi('/api/product?product_id=' + this.options.product_id),
+        this.fetchCBApi('/api/variants?product_id=' + this.options.product_id),
+        this.fetchCBApi(
+          '/api/fetch-items?product_id=' +
+            this.options.product_id +
+            '&type=plan'
+        ),
+        this.fetchCBApi(
+          '/api/fetch-items?product_id=' +
+            this.options.product_id +
+            '&type=charge'
+        )
+      ]).catch((err) => {
+        // Show Error message on the widget
+        this.showError();
+        console.error(err);
+        error = err;
+      });
+    this.productName = product.name;
     // Fetch Subscription price and one time prices
     const [subscriptionPrices, oneTimePrices] = await Promise.all([
       this.fetchCBApi('/api/fetch-item-prices?item_id=' + subscriptionPlans.id),
@@ -213,6 +220,7 @@ const CbWidget = {
       const option = document.createElement('option');
       option.value = frequency.id;
       option.dataset.itemId = frequency.item_id;
+      option.dataset.pricingModel = frequency.pricing_model;
       // Construct frequency text
       let frequencyText = '';
       if (frequency.period === 1) {
@@ -244,6 +252,9 @@ const CbWidget = {
     document.querySelector('#cb-frequency').dispatchEvent(new Event('change'));
   },
   changeFrequency: function (e) {
+    const pricingModel = document.querySelector(
+      '#cb-frequency [value="' + e.target.value + '"]'
+    )?.dataset?.pricingModel;
     this.widgetData.selectedFrequency = {
       id: e.target.value,
       itemId: document.querySelector(
@@ -251,7 +262,8 @@ const CbWidget = {
       )?.dataset?.itemId,
       type: e.target.value?.endsWith(`-charge-${this.options.currency}`)
         ? 'charge'
-        : 'plan'
+        : 'plan',
+      pricingModel
     };
     const subsDescription = document.querySelector('.cb-subs-description');
     subsDescription.innerHTML = '';
@@ -259,16 +271,22 @@ const CbWidget = {
       '#cb-frequency [value="' + e.target.value + '"]'
     )?.dataset?.description;
     subsDescription.innerHTML = desc ? desc : '';
+    if (pricingModel === 'flat_fee') {
+      document.querySelector('.cb-quantity').style = 'visibility: hidden';
+    } else {
+      document.querySelector('.cb-quantity').style = 'visibility: visible';
+    }
   },
   subscribeNow: async function (e) {
     e.preventDefault();
+    let url = `/api/generate_checkout_new_url?subscription_items[item_price_id][0]=${this.widgetData.selectedFrequency.id}&customer[id]=${this.options.customer_id}&currency_code=${this.options.currency}&item_type=${this.widgetData.selectedFrequency.type}`;
+    if (this.widgetData.selectedFrequency.type !== 'flat_fee') {
+      url = `${url}&subscription_items[quantity][0]=${this.quantity}`;
+    }
     try {
-      const checkout = await this.fetchCBApi(
-        `/api/generate_checkout_new_url?subscription_items[item_price_id][0]=${this.widgetData.selectedFrequency.id}&subscription_items[quantity][0]=${this.quantity}&customer[id]=${this.options.customer_id}&currency_code=${this.options.currency}&item_type=${this.widgetData.selectedFrequency.type}`,
-        {
-          method: 'POST'
-        }
-      );
+      const checkout = await this.fetchCBApi(url, {
+        method: 'POST'
+      });
       window.location.href = checkout.url;
     } catch (e) {
       console.error(e);
@@ -295,7 +313,7 @@ const CbWidget = {
 };
 CbWidget.init({
   customer_id: 'aras_shaffer', // Replace with Customer id
-  product_id: 'Soap', // Replace with product id
+  product_id: 'Iphone-15', // Replace with product id
   variantSelector: 'select', // select/button
   currency: 'USD' // 'USD', 'EUR', etc.,
 });
