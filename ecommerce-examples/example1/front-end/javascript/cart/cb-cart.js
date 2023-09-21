@@ -6,8 +6,13 @@ var cbInstance = Chargebee.init({
 
 const CbCart = {
   inited: false,
+  options: {},
   estimates: null,
-  init: async function () {
+  init: async function (options) {
+    this.options = {
+      ...this.options,
+      options
+    };
     await this.embedCart();
     document
       .querySelector('.cb-cart-button')
@@ -61,11 +66,7 @@ const CbCart = {
     const cart = cbInstance.getCart();
     const existingProduct = this.findProduct(productOptions.itemPriceId);
     if (existingProduct) {
-      if (
-        existingProduct.planQuantity + productOptions.quantity < 1 ||
-        productOptions.pricingModel === 'flat_fee'
-      )
-        return;
+      if (existingProduct.planQuantity + productOptions.quantity < 1) return;
       existingProduct.planQuantity += productOptions.quantity;
       existingProduct.data = {
         ...existingProduct.data,
@@ -86,49 +87,19 @@ const CbCart = {
         productOptions.type
       )
     );
-    this.addCustomData(product);
+    this.addCustomData(product, productOptions);
     cart.products.push(product);
     this.renderCartItem(product);
   },
-  addCustomData: function (product) {
-    if (!CbWidget.inited) return;
-    const type = product.items[0].item_type,
-      id = product.items[0].item_price_id;
-    let deliveryInfo = '',
-      unitPrice = 0,
-      currency = '';
-    const variant = CbWidget.variants.find((variant) => {
-      const prices =
-        type === 'charge'
-          ? CbWidget.widgetData[variant.id].oneTimePrices
-          : CbWidget.widgetData[variant.id].subscriptionPrices;
-      const priceObj = prices.find((price) => id === price.id);
-      if (priceObj) {
-        if (type === 'plan') {
-          deliveryInfo = `Delivers every ${
-            priceObj.shipping_period === 1 ? '' : priceObj.shipping_period
-          } `;
-          deliveryInfo = `${deliveryInfo.trim()} ${
-            priceObj.shipping_period_unit
-          }${priceObj.shipping_period === 1 ? '' : 's'}`;
-        } else {
-          deliveryInfo = 'Shipped once';
-        }
-        unitPrice = (priceObj.price / 100).toFixed(2);
-        currency = priceObj.currency_code;
-        return true;
-      }
-      return false;
-    });
+  addCustomData: function (product, productParams) {
     product.data = {
-      productName: CbWidget.productInfo.name,
-      image: CbWidget.productInfo.image || '',
-      variantName: variant.name,
-      deliveryInfo: deliveryInfo,
+      productName: productParams.productInfo.name,
+      image: productParams.productInfo.image,
+      variantName: productParams.productInfo.variantName,
+      deliveryInfo: productParams.productInfo.deliveryInfo,
       quantity: product.planQuantity,
-      unitPrice: unitPrice,
-      currencyCode: currency,
-      pricingModel: CbWidget.widgetData.selectedFrequency.pricingModel
+      unitPrice: productParams.productInfo.price,
+      currencyCode: this.options.currency
     };
   },
   renderCartItem: function (product) {
@@ -155,9 +126,7 @@ const CbCart = {
               <button class="cb-decrement-btn" onclick="CbCart.modifyQuantity('${
                 data.id
               }', -1)">-</button>
-              <span class="cb-cart-item-quantity-input">${
-                data.quantity
-              }</span>
+              <span class="cb-cart-item-quantity-input">${data.quantity}</span>
               <button class="cb-increment-btn" onclick="CbCart.modifyQuantity('${
                 data.id
               }', 1)">+</button>
@@ -224,19 +193,22 @@ const CbCart = {
       }&purchase_items[item_price_id][${index}]=${
         product.items[0].item_price_id
       }&`;
-      if (product.data.pricingModel !== 'flat_fee') {
-        query = `${query}purchase_items[quantity][${index}]=${product.planQuantity}&`;
-      }
+      query = `${query}purchase_items[quantity][${index}]=${product.planQuantity}&`;
     });
     document.querySelector('#cb-cart-total-display').innerText =
       'calculating...';
-    const res = await CbWidget.fetchCBApi(`/api/calculate_estimates?${query}`, {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8'
-      }
-    });
-    this.estimates = res;
+    try {
+      const res = await fetch(`/api/calculate_estimates?${query}`, {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8'
+        }
+      });
+      const estimates = await res.json();
+      this.estimates = estimates;
+    } catch (err) {
+      console.error(err);
+    }
     this.updateCartPrice();
     this.updateLocalStorage();
   },
@@ -244,7 +216,7 @@ const CbCart = {
     if (this.estimates.total) {
       document.querySelector('#cb-cart-total-display').innerText = `${(
         this.estimates.total / 100
-      ).toFixed(2)} ${CbWidget.options.currency}`;
+      ).toFixed(2)} ${this.options.currency}`;
     }
   },
   findProduct: function (itemPriceId) {
@@ -281,4 +253,6 @@ const CbCart = {
   }
 };
 
-CbCart.init();
+CbCart.init({
+  currency: 'USD'
+});

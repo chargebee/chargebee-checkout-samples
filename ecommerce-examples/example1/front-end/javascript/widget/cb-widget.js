@@ -72,8 +72,12 @@ const CbWidget = {
             itemPriceId: this.widgetData.selectedFrequency.id,
             type: this.widgetData.selectedFrequency.type,
             quantity: this.quantity,
-            pricingModel: this.widgetData.selectedFrequency.pricingModel,
-            productImage: ''
+            productInfo: {
+              ...this.productInfo,
+              variantName: this.widgetData.selectedFrequency.variantName,
+              deliveryInfo: document.querySelector('.cb-delivery-interval').innerText,
+              price: this.widgetData.selectedFrequency.price
+            }
           });
         });
     }
@@ -224,7 +228,8 @@ const CbWidget = {
       const option = document.createElement('option');
       option.value = frequency.id;
       option.dataset.itemId = frequency.item_id;
-      option.dataset.pricingModel = frequency.pricing_model;
+      option.dataset.variant = this.widgetData[variantId].name;
+      option.dataset.price = (frequency.price / 100).toFixed(2);
       // Construct frequency text
       let frequencyText = '';
       if (frequency.period === 1) {
@@ -256,9 +261,6 @@ const CbWidget = {
     document.querySelector('#cb-frequency').dispatchEvent(new Event('change'));
   },
   changeFrequency: function (e) {
-    const pricingModel = document.querySelector(
-      '#cb-frequency [value="' + e.target.value + '"]'
-    )?.dataset?.pricingModel;
     this.widgetData.selectedFrequency = {
       id: e.target.value,
       itemId: document.querySelector(
@@ -267,7 +269,12 @@ const CbWidget = {
       type: e.target.value?.endsWith(`-charge-${this.options.currency}`)
         ? 'charge'
         : 'plan',
-      pricingModel
+      variantName: document.querySelector(
+        '#cb-frequency [value="' + e.target.value + '"]'
+      )?.dataset?.variant,
+      price: document.querySelector(
+        '#cb-frequency [value="' + e.target.value + '"]'
+      )?.dataset?.price
     };
     const subsDescription = document.querySelector('.cb-subs-description');
     subsDescription.innerHTML = '';
@@ -275,11 +282,6 @@ const CbWidget = {
       '#cb-frequency [value="' + e.target.value + '"]'
     )?.dataset?.description;
     subsDescription.innerHTML = desc ? desc : '';
-    if (pricingModel === 'flat_fee') {
-      document.querySelector('.cb-quantity').style = 'visibility: hidden';
-    } else {
-      document.querySelector('.cb-quantity').style = 'visibility: visible';
-    }
   },
   subscribeNow: async function (e) {
     e.preventDefault();
