@@ -9,7 +9,7 @@ const CbWidget = {
     showAddToCart: true, // Display Add to Cart in your widget
     showSubscribeNow: true // Display Subscribe now in your widget
   },
-  productName: '',
+  productInfo: {},
   variants: [],
   quantity: 1,
   prices: {
@@ -72,7 +72,8 @@ const CbWidget = {
             itemPriceId: this.widgetData.selectedFrequency.id,
             type: this.widgetData.selectedFrequency.type,
             quantity: this.quantity,
-            pricingModel: this.widgetData.selectedFrequency.pricingModel
+            pricingModel: this.widgetData.selectedFrequency.pricingModel,
+            productImage: ''
           });
         });
     }
@@ -108,7 +109,10 @@ const CbWidget = {
         console.error(err);
         error = err;
       });
-    this.productName = product.name;
+    this.productInfo = {
+      name: product.name,
+      image: product?.metadata?.image
+    };
     // Fetch Subscription price and one time prices
     const [subscriptionPrices, oneTimePrices] = await Promise.all([
       this.fetchCBApi('/api/fetch-item-prices?item_id=' + subscriptionPlans.id),
