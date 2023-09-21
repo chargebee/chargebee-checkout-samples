@@ -1,5 +1,5 @@
 .cb-cart-container {
-  width: 50%;
+  width: 25%;
   height: 100vh;
   position: fixed;
   top: 0;
@@ -56,6 +56,7 @@
 .cb-clear-cart {
   display: flex;
   justify-content: flex-end;
+  margin-bottom: 30px;
 }
 
 .cb-clear-cart .cb-cta-secondary {
@@ -64,39 +65,15 @@
 
 .cb-cart-items-wrapper {
   padding: 0 30px;
-}
-
-.cb-cart-items-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.cb-cart-items-table thead {
-  text-align: left;
-}
-
-.cb-cart-items-table th,
-.cb-cart-items-table td {
-  padding: 20px 0;
-  border-bottom: 1px solid #d7d5dd;
-}
-
-.cb-cart-items-table th:not(:first-child),
-.cb-cart-items-table td:not(:first-child) {
-  text-align: right;
-}
-
-.cb-cart-items-table th:last-child {
-  width: 50px;
+  overflow: auto;
+    max-height: 70vh;
 }
 
 .cb-cart-item-remove {
-  border-radius: 50%;
-  background: #212121e6;
-  color: white;
-  padding: 5px 9px;
   font-size: 12px;
   cursor: pointer;
+  color: #c81f1f;
+  font-weight: 600;
 }
 
 .cb-delivery-info {
@@ -106,9 +83,15 @@
 .cb-cart-total-price {
   padding: 30px 50px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   font-size: 24px;
   font-weight: 600;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 20vw;
+  background: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 15px 5px 15px;
 }
 
 .cb-cart-total-price div:first-child {
@@ -128,4 +111,58 @@
   padding: 0 10px;
   border-radius: 5px;
   border: 1px solid #9797a5;
+}
+
+.cb-item-image img {
+  width: 125px;
+  border-radius: 5px;
+}
+
+.cb-cart-item-container {
+  display: flex;
+  padding: 15px 0;
+  border-top: 1px solid #9797a5;
+  align-items: center;
+}
+
+.cb-item-detail {
+  padding: 0 15px;
+}
+
+.cb-productInfo,
+.cb-unitPrice,
+.cb-cart-item-quantity {
+  margin-bottom: 10px;
+}
+
+.cb-cart-item-quantity {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cb-cart-item-container .cb-quantity-wrapper {
+  border: none;
+}
+
+.cb-cart-item-container .cb-quantity-wrapper button {
+  border-radius: 50%;
+  border: 1px solid #d7d5dd;
+  padding: 5px 10px;
+  background: #d7d5dd;
+  cursor: pointer;
+}
+
+.cb-continue-shopping {
+  padding: 10px 20px;
+  background-color: var(--cb-cta-bg);
+  color: var(--cb-cta-text);
+  border-radius: var(--cb-border-radius);
+  text-decoration: none;
+  display: block;
+  text-align: center;
+  border: none;
+  width: 80%;
+  margin: 30px auto;
+  cursor: pointer;
 }

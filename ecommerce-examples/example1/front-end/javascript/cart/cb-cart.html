@@ -50,49 +50,10 @@
     <button class="cb-cta-secondary" onclick="CbCart.clearCart()">Clear cart</button>
   </div>
   <div class="cb-cart-items-wrapper">
-    <table class="cb-cart-items-table">
-      <thead>
-        <tr>
-          <th>Product info</th>
-          <th>Quantity</th>
-          <th>Price per unit</th>
-          <th>Total</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-    <div class="cb-cart-total-price">
-      <div>Total</div>
-      <div id="cb-cart-total-display">0.00</div>
-    </div>
   </div>
-  <form class="cb-customer-info" onsubmit="CbCart.proceedToCheckout(event)">
-    <div class="cb-input-wrapper">
-      <input placeholder="First name" type="text" name="firstName" required/>
-    </div>
-    <div class="cb-input-wrapper">
-      <input placeholder="Last name" type="text" name="lastName" required/>
-    </div>
-    <div class="cb-input-wrapper">
-      <input placeholder="Email" type="email" name="email" required/>
-    </div>
-    <div class="cb-input-wrapper">
-      <input placeholder="Address line 1" type="text" name="line1" required/>
-    </div>
-    <div class="cb-input-wrapper">
-      <input placeholder="City" type="text" name="city" required/>
-    </div>
-    <div class="cb-input-wrapper">
-      <input placeholder="Zip" type="text" name="zip" required/>
-    </div>
-    <div class="cb-input-wrapper">
-      <select name="country" required>
-        <option value="">Select Country</option>
-      </select>
-    </div>
-    <div class="cb-form-submit-wrapper">
-      <button class="cb-cta-button">Checkout</button>
-    </div>
-  </form>
+  <button class="cb-continue-shopping" onclick="CbCart.toggleCart()">Continue Shopping</button>
+  <div class="cb-cart-total-price">
+    <div>Total</div>
+    <div id="cb-cart-total-display">0.00</div>
+  </div>
 </section>

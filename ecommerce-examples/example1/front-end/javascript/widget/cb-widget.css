@@ -148,3 +148,10 @@ body .cb-hide {
 .cb-cta-container {
   margin-top: 30px;
 }
+
+.cb-add-to-cart {
+  background-color: #e5f3fa;
+  border-color: #8ccce6;
+  color: #1d485f;
+  border: 1px solid #0229383d;
+}

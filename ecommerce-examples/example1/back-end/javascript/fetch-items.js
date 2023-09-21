@@ -12,7 +12,7 @@ const fetchItems = (req, res) => {
         //handle error
         console.log(error);
       } else {
-        var item;
+        var item = {};
         if (result.list.length) {
           item = result.list[0].item;
         }
