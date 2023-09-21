@@ -1,7 +1,6 @@
 var cbInstance = Chargebee.init({
   site: 'pc-pim-test', // your test site
-  isItemsModel: true,
-  enableMixCartCheckout: true
+  isItemsModel: true
 });
 
 const CbCart = {
