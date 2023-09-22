@@ -7,10 +7,10 @@ const CbCart = {
   inited: false,
   options: {},
   estimates: null,
-  init: async function (options) {
+  init: async function (options = {}) {
     this.options = {
       ...this.options,
-      options
+      ...options
     };
     await this.embedCart();
     document
@@ -117,7 +117,7 @@ const CbCart = {
             </div>
           </div>
           <div class="cb-unitPrice">
-            ${data.unitPrice} ${data.currencyCode}
+            ${data.unitPrice} ${data.currency}
           </div>
           <div class="cb-cart-item-quantity">
             <label class="">qty:</label>
@@ -146,7 +146,8 @@ const CbCart = {
     row.className = 'cb-cart-item-container';
     row.innerHTML = template({
       id: product.items[0].item_price_id,
-      ...product.data
+      ...product.data,
+      currency: this.options.currency
     });
     wrapper.appendChild(row);
     this.updateCartQuantity();

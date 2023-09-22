@@ -66,7 +66,7 @@
 .cb-cart-items-wrapper {
   padding: 0 30px;
   overflow: auto;
-    max-height: 70vh;
+  max-height: 70vh;
 }
 
 .cb-cart-item-remove {
@@ -74,6 +74,7 @@
   cursor: pointer;
   color: #c81f1f;
   font-weight: 600;
+  display: inline-block;
 }
 
 .cb-delivery-info {
