@@ -75,7 +75,8 @@ const CbWidget = {
             productInfo: {
               ...this.productInfo,
               variantName: this.widgetData.selectedFrequency.variantName,
-              deliveryInfo: document.querySelector('.cb-delivery-interval').innerText,
+              deliveryInfo: document.querySelector('.cb-delivery-interval')
+                .innerText,
               price: this.widgetData.selectedFrequency.price
             }
           });
@@ -319,7 +320,7 @@ const CbWidget = {
 };
 CbWidget.init({
   customer_id: 'aras_shaffer', // Replace with Customer id
-  product_id: 'Iphone-15', // Replace with product id
+  product_id: 'Dog-food', // Replace with product id
   variantSelector: 'select', // select/button
   currency: 'USD' // 'USD', 'EUR', etc.,
 });

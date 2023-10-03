@@ -142,7 +142,7 @@ const CbCart = {
     };
     const wrapper = document.querySelector('.cb-cart-items-wrapper');
     const row = document.createElement('div');
-    row.id = product.items[0].item_price_id;
+    row.id = `price-${product.items[0].item_price_id}`;
     row.className = 'cb-cart-item-container';
     row.innerHTML = template({
       id: product.items[0].item_price_id,
@@ -165,7 +165,7 @@ const CbCart = {
   },
   updateCartRow: function (product) {
     const priceId = product.items[0].item_price_id;
-    const row = document.querySelector(`#${priceId}`);
+    const row = document.querySelector(`#price-${priceId}`);
     row.querySelector('.cb-cart-item-quantity-input').innerText =
       product.planQuantity;
     this.calculateEstimate();
@@ -175,7 +175,7 @@ const CbCart = {
     const productIndex = cart.products.findIndex((item) => {
       return item.items[0].item_price_id === itemPriceId;
     });
-    document.querySelector(`#${itemPriceId}`)?.remove();
+    document.querySelector(`#price-${itemPriceId}`)?.remove();
     cart.products.splice(productIndex, 1);
     this.updateCartQuantity();
     if (!cart.products.length) {
