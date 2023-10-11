@@ -7,8 +7,6 @@ const fetchVariants = require('./fetch-variants');
 const fetchProduct = require('./fetch-product');
 const checkoutNew = require('./new-checkout');
 const estimates = require('./fetch-estimates');
-const purchases = require('./new-purchase');
-const createCustomer = require('./create-customer');
 const { siteName, API_KEY } = require('./constants');
 
 // CORS is enabled only for demo. Please dont use this in production unless you know about CORS
@@ -79,18 +77,6 @@ app.post('/api/generate_checkout_new_url', checkoutNew);
 app.post('/api/calculate_estimates', async (req, res) => {
   await estimates(req, res);
 });
-
-/* 
-  Creates new customer
-*/
-app.post('/api/create_customer', async (req, res) => {
-  await createCustomer(req, res);
-});
-
-/* 
-  Create new purchase for the Cart items
-*/
-app.post('/api/purchase', purchases);
 
 // Configure the path of your HTML file to be loaded
 app.get('/', (req, res) => {

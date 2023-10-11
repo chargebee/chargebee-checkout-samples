@@ -14,14 +14,18 @@ if (credentialError) {
   throw Error(credentialError);
 }
 module.exports = async (req, res) => {
-  const response = await fetch(
-    `https://${siteName}.chargebee.com/api/v2/products/${req.query.product_id}`,
-    {
-      headers: {
-        Authorization: `Basic ${Buffer.from(API_KEY).toString('base64')}`
+  try {
+    const response = await fetch(
+      `https://${siteName}.chargebee.com/api/v2/products/${req.query.product_id}`,
+      {
+        headers: {
+          Authorization: `Basic ${Buffer.from(API_KEY).toString('base64')}`
+        }
       }
-    }
-  );
-  const productWrapper = await response.json();
-  res.status(200).json(productWrapper.product);
+    );
+    const productWrapper = await response.json();
+    res.status(200).json(productWrapper.product);
+  } catch (err) {
+    console.log(err);
+  }
 };

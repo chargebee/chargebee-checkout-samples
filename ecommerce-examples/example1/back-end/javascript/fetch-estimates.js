@@ -15,7 +15,7 @@ if (credentialError) {
 }
 module.exports = async (req, res) => {
   let data = '',
-    itemsLength = req.query.purchase_items.index.length;
+    itemsLength = req.query?.purchase_items?.index?.length || 0;
   for (let i = 0; i < itemsLength; i++) {
     data = `${data}purchase_items[index][${i}]=${
       i + 1
