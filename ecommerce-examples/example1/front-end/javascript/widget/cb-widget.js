@@ -9,6 +9,7 @@ const CbWidget = {
     showAddToCart: true, // Display Add to Cart in your widget
     showSubscribeNow: true // Display Subscribe now in your widget
   },
+  productInfo: {},
   variants: [],
   quantity: 1,
   prices: {
@@ -54,14 +55,32 @@ const CbWidget = {
     }
     // Add event handlers for '-' and '+' buttons of Quantity selectors
     document
-      .querySelector('.cb-decrement-btn')
+      .querySelector('.cb-quantity .cb-decrement-btn')
       .addEventListener('click', () => this.quantityModifier(-1));
     document
-      .querySelector('.cb-increment-btn')
+      .querySelector('.cb-quantity .cb-increment-btn')
       .addEventListener('click', () => this.quantityModifier(1));
     // Show blocks based on the options provided
     if (!this.options.showAddToCart) {
       this.toggleBlock('#cb-add-to-cart', true);
+    } else {
+      document
+        .querySelector('#cb-add-to-cart')
+        .addEventListener('click', () => {
+          CbCart.addProductToCart({
+            itemId: this.widgetData.selectedFrequency.itemId,
+            itemPriceId: this.widgetData.selectedFrequency.id,
+            type: this.widgetData.selectedFrequency.type,
+            quantity: this.quantity,
+            productInfo: {
+              ...this.productInfo,
+              variantName: this.widgetData.selectedFrequency.variantName,
+              deliveryInfo: document.querySelector('.cb-delivery-interval')
+                .innerText,
+              price: this.widgetData.selectedFrequency.price
+            }
+          });
+        });
     }
     if (!this.options.showSubscribeNow) {
       this.toggleBlock('#cb-checkout', true);
@@ -75,22 +94,30 @@ const CbWidget = {
   retrieveData: async function () {
     let error = null;
     // Fetch Variant, Plans, Charges info
-    const [variants, subscriptionPlans, oneTimeCharges] = await Promise.all([
-      this.fetchCBApi('/api/variants?product_id=' + this.options.product_id),
-      this.fetchCBApi(
-        '/api/fetch-items?product_id=' + this.options.product_id + '&type=plan'
-      ),
-      this.fetchCBApi(
-        '/api/fetch-items?product_id=' +
-          this.options.product_id +
-          '&type=charge'
-      )
-    ]).catch((err) => {
-      // Show Error message on the widget
-      this.showError();
-      console.error(err);
-      error = err;
-    });
+    const [product, variants, subscriptionPlans, oneTimeCharges] =
+      await Promise.all([
+        this.fetchCBApi('/api/product?product_id=' + this.options.product_id),
+        this.fetchCBApi('/api/variants?product_id=' + this.options.product_id),
+        this.fetchCBApi(
+          '/api/fetch-items?product_id=' +
+            this.options.product_id +
+            '&type=plan'
+        ),
+        this.fetchCBApi(
+          '/api/fetch-items?product_id=' +
+            this.options.product_id +
+            '&type=charge'
+        )
+      ]).catch((err) => {
+        // Show Error message on the widget
+        this.showError();
+        console.error(err);
+        error = err;
+      });
+    this.productInfo = {
+      name: product.name,
+      image: product?.metadata?.image
+    };
     // Fetch Subscription price and one time prices
     const [subscriptionPrices, oneTimePrices] = await Promise.all([
       this.fetchCBApi('/api/fetch-item-prices?item_id=' + subscriptionPlans.id),
@@ -201,6 +228,9 @@ const CbWidget = {
     frequencies.forEach((frequency) => {
       const option = document.createElement('option');
       option.value = frequency.id;
+      option.dataset.itemId = frequency.item_id;
+      option.dataset.variant = this.widgetData[variantId].name;
+      option.dataset.price = (frequency.price / 100).toFixed(2);
       // Construct frequency text
       let frequencyText = '';
       if (frequency.period === 1) {
@@ -221,7 +251,9 @@ const CbWidget = {
           frequency.shipping_period_unit
         }${frequency.shipping_period === 1 ? '' : 's'}`;
       }
-      option.dataset.description = `<div class="cb-delivery-interval">${shippingText}</div>${frequency.description || ''}`;
+      option.dataset.description = `<div class="cb-delivery-interval">${shippingText}</div>${
+        frequency.description || ''
+      }`;
       frequencySelector.appendChild(option);
     });
     frequencySelector.addEventListener('change', (e) => {
@@ -232,9 +264,18 @@ const CbWidget = {
   changeFrequency: function (e) {
     this.widgetData.selectedFrequency = {
       id: e.target.value,
-      type: e.target.value?.endsWith(`-Charge-${this.options.currency}`)
+      itemId: document.querySelector(
+        '#cb-frequency [value="' + e.target.value + '"]'
+      )?.dataset?.itemId,
+      type: e.target.value?.endsWith(`-charge-${this.options.currency}`)
         ? 'charge'
-        : 'plan'
+        : 'plan',
+      variantName: document.querySelector(
+        '#cb-frequency [value="' + e.target.value + '"]'
+      )?.dataset?.variant,
+      price: document.querySelector(
+        '#cb-frequency [value="' + e.target.value + '"]'
+      )?.dataset?.price
     };
     const subsDescription = document.querySelector('.cb-subs-description');
     subsDescription.innerHTML = '';
@@ -245,13 +286,14 @@ const CbWidget = {
   },
   subscribeNow: async function (e) {
     e.preventDefault();
+    let url = `/api/generate_checkout_new_url?subscription_items[item_price_id][0]=${this.widgetData.selectedFrequency.id}&customer[id]=${this.options.customer_id}&currency_code=${this.options.currency}&item_type=${this.widgetData.selectedFrequency.type}`;
+    if (this.widgetData.selectedFrequency.type !== 'flat_fee') {
+      url = `${url}&subscription_items[quantity][0]=${this.quantity}`;
+    }
     try {
-      const checkout = await this.fetchCBApi(
-        `/api/generate_checkout_new_url?subscription_items[item_price_id][0]=${this.widgetData.selectedFrequency.id}&subscription_items[quantity][0]=${this.quantity}&customer[id]=${this.options.customer_id}&currency_code=${this.options.currency}&item_type=${this.widgetData.selectedFrequency.type}`,
-        {
-          method: 'POST'
-        }
-      );
+      const checkout = await this.fetchCBApi(url, {
+        method: 'POST'
+      });
       window.location.href = checkout.url;
     } catch (e) {
       console.error(e);
@@ -277,8 +319,8 @@ const CbWidget = {
   }
 };
 CbWidget.init({
-  customer_id: 'CUSTOMER_ID', // Replace with Customer id
-  product_id: 'PRODUCT_ID', // Replace with product id
+  customer_id: 'aras_shaffer', // Replace with Customer id
+  product_id: 'Dog-food', // Replace with product id
   variantSelector: 'select', // select/button
   currency: 'USD' // 'USD', 'EUR', etc.,
 });

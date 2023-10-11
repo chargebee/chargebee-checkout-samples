@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PDP Widget</title>
+    <link rel="stylesheet" href="/static/widget/cb-widget.css" />
+  </head>
+  <body>
+    <!-- Widget Wrapper Container starts -->
+    <div class="cb-widget-container">
+      <!-- Loading Container starts -->
+      <div class="cb-loading-container" style="display: block">Loading...</div>
+      <!-- Loading Container ends -->
+      <!-- Widget Main Container starts -->
+      <div class="cb-widget-loaded" style="display: none">
+        <!-- Widget Title -->
+        <h2 class="cb-widget-title">PDP Widget</h2>
+        <!-- Variant Selector starts -->
+        <div class="cb-variant-select-wrapper">
+          <label for="cb-variant">Select Variant:</label>
+          <div class="cb-variant-selector">
+            <!-- These buttons are dummy elements. It will be removed after data is recieved from backend -->
+            <button class="cb-variant">Variant 1</button>
+            <button class="cb-variant">Variant 2</button>
+            <button class="cb-variant">Variant 3</button>
+          </div>
+        </div>
+        <!-- Variant Selector ends -->
+        <!-- Frequency Selector starts -->
+        <div class="cb-frequency-select">
+          <label for="cb-frequency">Choose Purchase Option:</label>
+          <select id="cb-frequency">
+            <!-- These options are dummy elements. It will be removed after data is recieved from backend -->
+            <option value="monthly">Monthly</option>
+            <option value="quarterly">Quarterly</option>
+            <option value="annually">Annually</option>
+          </select>
+        </div>
+        <!-- Frequency Selector ends -->
+        <!-- Quantity Selector starts -->
+        <div class="cb-quantity">
+          <label for="cb-quantity-input">Quantity:</label>
+          <div class="cb-quantity-wrapper">
+            <button type="button" class="cb-decrement-btn">-</button>
+            <span id="cb-quantity-input">1</span>
+            <button type="button" class="cb-increment-btn">+</button>
+          </div>
+        </div>
+        <!-- Quantity Selector ends -->
+        <div class="cb-subs-description"></div>
+        <!-- CTA Wrapper starts -->
+        <div class="cb-cta-container">
+          <!-- Add click event for Add to Cart to add your cart logic -->
+          <a class="cb-cta-button cb-add-to-cart" id="cb-add-to-cart" href="javascript:void(0)"
+            >Add to Cart</a
+          >
+          <a class="cb-cta-button" id="cb-checkout" href="#">Subscribe Now</a>
+        </div>
+        <!-- CTA Wrapper ends -->
+      </div>
+      <!-- Widget Main Container ends -->
+    </div>
+    <!-- Widget Wrapper Container ends -->
+    <div class="cb-cart-container close"></div>
+    <script src="https://js.chargebee.com/v2/chargebee.js"></script>
+    <script src="/static/cart/cb-cart.js"></script>
+    <script src="/static/widget/cb-widget.js"></script>
+  </body>
+</html>
