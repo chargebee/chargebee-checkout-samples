@@ -7,6 +7,8 @@ const fetchVariants = require('./fetch-variants');
 const fetchProduct = require('./fetch-product');
 const checkoutNew = require('./new-checkout');
 const estimates = require('./fetch-estimates');
+const purchases = require('./new-purchase');
+const fetchCustomer = require('./fetch-customer');
 const { siteName, API_KEY } = require('./constants');
 
 // CORS is enabled only for demo. Please dont use this in production unless you know about CORS
@@ -78,6 +80,18 @@ app.post('/api/calculate_estimates', async (req, res) => {
   await estimates(req, res);
 });
 
+/* 
+  Creates new customer
+*/
+app.get('/api/fetch_customer', async (req, res) => {
+  await fetchCustomer(req, res);
+});
+
+/* 
+  Create new purchase for the Cart items
+*/
+app.post('/api/purchase', purchases);
+
 // Configure the path of your HTML file to be loaded
 app.get('/', (req, res) => {
   res.sendFile(
@@ -88,6 +102,12 @@ app.get('/', (req, res) => {
 app.get('/cart', (req, res) => {
   res.sendFile(
     path.join(__dirname, '../../front-end/javascript/cart/cb-cart.html')
+  );
+});
+
+app.get('/checkout', (req, res) => {
+  res.sendFile(
+    path.join(__dirname, '../../front-end/javascript/checkout/cb-checkout.html')
   );
 });
 
