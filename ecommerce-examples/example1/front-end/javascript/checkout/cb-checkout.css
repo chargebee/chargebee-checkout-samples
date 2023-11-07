@@ -1,0 +1,276 @@
+body {
+  font-family: system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    'Open Sans',
+    'Helvetica Neue',
+    sans-serif;
+  margin: auto;
+  max-width: 1200px;
+  padding: 0 15px;
+}
+
+.cb-hide {
+  display: none !important;
+}
+
+.cb-back {
+  margin-top: 40px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.cb-checkout-title {
+  margin-top: 30px;
+}
+
+.cb-checkout-form h2 {
+  border-bottom: 1px solid #d7d5dd;
+  padding-bottom: 5px;
+}
+
+.cb-checkout-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.cb-checkout-form {
+  padding: 0 15px 0 0;
+  width: 60%;
+}
+
+.cb-input-wrapper {
+  display: flex;
+}
+
+.cb-input-wrapper input+input {
+  margin-left: 30px;
+}
+
+.cb-input-wrapper input,
+.cb-input-wrapper select {
+  height: 36px;
+  padding: 0 10px;
+  border: 1px solid #9797a5;
+  border-radius: 5px;
+  margin: 10px 0;
+  width: 100%;
+}
+
+.cb-order-summary {
+  padding: 0 30px 30px;
+  background-color: #efeff2;
+  width: 30%;
+}
+
+.cb-product-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid;
+  line-height: 24px;
+  font-size: 14px;
+}
+
+.cb-order-total {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.cb-cta-button {
+  padding: 10px 20px;
+  background-color: #012a38;
+  color: #fff;
+  border-radius: 4px;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+  margin: 50px 0;
+  border: 1px solid #0229383d;
+  width: 100%;
+  height: 42px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.cb-form-submit-wrapper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.cb-cta-secondary-button {
+  margin-left: 30px;
+  background-color: #e5f3fa;
+  border-color: #8ccce6;
+  color: #1d485f;
+  border: 1px solid #0229383d;
+}
+
+
+
+
+.ex1-wrap {
+  max-width: 480px;
+  margin: 80px auto;
+}
+
+.ex1-contain {
+  border-radius: 4px;
+  background: #fff;
+  padding: 24px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.04);
+  margin-bottom: 16px;
+}
+
+.ex1-fieldset>.ex1-field,
+.ex1-fieldset>.ex1-fields {
+  margin-bottom: 40px;
+}
+
+.ex1-field {
+  position: relative;
+}
+
+.ex1-fields {
+  display: flex;
+  margin-left: -16px;
+}
+
+.ex1-fields .ex1-field {
+  flex: 1;
+  margin-left: 16px;
+}
+
+.ex1-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #3A62BA;
+  position: absolute;
+  left: 0;
+  bottom: -1.25rem;
+  pointer-events: none;
+  padding-left: 0.125rem;
+  z-index: 1;
+  font-weight: normal;
+  -webkit-transition: all 0.28s ease;
+  transition: all 0.28s ease;
+}
+
+.ex1-input {
+  width: 100%;
+  display: block;
+  background: transparent;
+  border-radius: 0;
+  border: none;
+  padding: 4px 2px;
+  border-width: 0;
+  border-color: transparent;
+  color: #252857;
+  font-size: 16px;
+  font-family: inherit;
+  font-weight: 500;
+  transition: .2s;
+  cursor: text;
+  /* font-weight: inherit; */
+  -webkit-transition: all 0.28s ease;
+  transition: all 0.28s ease;
+  box-shadow: none;
+}
+
+.ex1-input::placeholder {
+  color: #abacbe;
+}
+
+.ex1-input:focus~.ex1-label,
+.ex1-input.focus~.ex1-label,
+.ex1-input.complete~.ex1-label {
+  color: #3A62BA;
+}
+
+.ex1-input.invalid~.ex1-label {
+  color: #E94745;
+}
+
+.ex1-bar {
+  position: relative;
+  border-bottom: 0.0625rem solid #EBEBEB;
+  display: block;
+}
+
+.ex1-bar::before {
+  content: '';
+  height: 0.125rem;
+  width: 0;
+  left: 50%;
+  bottom: -0.0625rem;
+  position: absolute;
+  background: #3A62BA;
+  -webkit-transition: left 0.28s ease, width 0.28s ease;
+  transition: left 0.28s ease, width 0.28s ease;
+  z-index: 2;
+}
+
+.ex1-input:focus~.ex1-bar::before,
+.ex1-input.focus~.ex1-bar::before,
+.ex1-input.invalid~.ex1-bar::before {
+  width: 100%;
+  left: 0;
+}
+
+.ex1-input.invalid~.ex1-bar::before {
+  background: #E94745;
+}
+
+.cb-existing-card {
+  padding: 15px;
+  border-radius: 5px;
+  border: 1px solid #d7d5dd;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.cb-existing-card .cb-cta-button {
+  width: auto;
+  margin: 0;
+}
+
+.cb-card-details {
+  margin-left: 15px;
+}
+
+.cb-card-number {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.cb-expiry-details {
+  font-size: 12px;
+}
+
+#existing-card {
+  margin: 0 0 0 auto;
+  width: auto;
+}
+
+.cb-read-only {
+  line-height: 1.6;
+}
+
+.error-container {
+  padding: 20px 20px;
+  color: red;
+  font-weight: bold;
+  background: #f4cece;
+  border-radius: 5px;
+  border: 1px solid red;
+  margin-bottom: 30px;
+}

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Checkout</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://css.chargebeestatic.com/static/app-static-assets/core/core-3.0.9/images/favicon.png"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/static/checkout/cb-checkout.css"
+    />
+  </head>
+  <body>
+    <div class="cb-back" onclick="history.back()"> ⬅ Continue Shopping </div>
+    <h1 class="cb-checkout-title">
+      Checkout
+    </h1>
+    <section class="cb-checkout-container">
+      <form class="cb-checkout-form">
+        <div class="cb-customer-info">
+          <h2>Customer Details</h2>
+          <div class="cb-input-wrapper">
+            <input
+              placeholder="First name"
+              type="text"
+              name="firstName"
+              required
+            />
+            <input
+              placeholder="Last name"
+              type="text"
+              name="lastName"
+              required
+            />
+          </div>
+          <div class="cb-input-wrapper">
+            <input placeholder="Email" type="email" name="email" required />
+          </div>
+        </div>
+        <div class="cb-billing-info">
+          <h2>Billing Address</h2>
+          <div class="cb-billing-wrapper">
+            <div class="cb-input-wrapper">
+              <input
+                placeholder="Address line 1"
+                type="text"
+                name="billing_line1"
+                required
+              />
+            </div>
+            <div class="cb-input-wrapper">
+              <input
+                placeholder="Address line 2"
+                type="text"
+                name="billing_line2"
+              />
+            </div>
+            <div class="cb-input-wrapper">
+              <input placeholder="City" type="text" name="billing_city" required/>
+              <input placeholder="Zip" type="text" name="billing_zip" required/>
+            </div>
+            <div class="cb-input-wrapper">
+              <select name="billing_country" required>
+                <option value="">Select Country</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="cb-shipping-info">
+          <h2>Shipping Address</h2>
+          <div class="cb-input-wrapper1">
+            <input type="checkbox" name="same_shipping" />
+            <label>Same as Billing address</label>
+          </div>
+          <div class="cb-shipping-wrapper">
+            <div class="cb-input-wrapper">
+              <input
+                placeholder="Address line 1"
+                type="text"
+                name="line1"
+                required
+              />
+            </div>
+            <div class="cb-input-wrapper">
+              <input
+                placeholder="Address line 2"
+                type="text"
+                name="line2"
+              />
+            </div>
+            <div class="cb-input-wrapper">
+              <input placeholder="City" type="text" name="city" required />
+              <input placeholder="Zip" type="text" name="zip" required />
+            </div>
+            <div class="cb-input-wrapper">
+              <select name="country" required>
+                <option value="">Select Country</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="cb-card-info">
+          <h2>Payment Information</h2>
+          <div class="cb-existing-card cb-hide">
+            <div class="cb-card-icon">
+              <img src="/static/images/card.png" />
+            </div>
+            <div class="cb-card-details">
+              <div class="cb-card-number">
+                Loading...
+              </div>
+              <div class="cb-expiry-details"></div>
+            </div>
+            <div style="margin-left: auto">
+              <button class="cb-cta-button cb-cta-secondary-button" id="add-new-card">Add new card</button>
+            </div>
+          </div>
+          <div class="ex1-fieldset">
+            <div>
+              <button class="cb-cta-button cb-cta-secondary-button cb-hide" id="existing-card">Use existing card</button>
+            </div>
+            <div class="ex1-field">
+              <input
+                class="ex1-input"
+                type="text"
+                placeholder="John Doe"
+              />
+              <label class="ex1-label">Name on Card</label
+              ><i class="ex1-bar"></i>
+            </div>
+            <div class="ex1-field">
+              <!-- Container element for number field -->
+              <div id="card-number" class="ex1-input"></div>
+              <label class="ex1-label">Card Number</label
+              ><i class="ex1-bar"></i>
+            </div>
+            <div class="ex1-fields">
+              <div class="ex1-field">
+                <!-- Container element for expiry field -->
+                <div id="card-expiry" class="ex1-input"></div>
+                <label class="ex1-label">Expiry</label><i class="ex1-bar"></i>
+              </div>
+              <div class="ex1-field">
+                <!-- Container element for CVV field -->
+                <div id="card-cvc" class="ex1-input"></div>
+                <label class="ex1-label">CVC</label><i class="ex1-bar"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="error-container cb-hide"></div>
+        <button class="cb-cta-button" type="submit">Checkout</button>
+      </form>
+      <div class="cb-order-summary">
+        <h2>Order Summary</h2>
+        <div class="cb-product-list"></div>
+        <div class="cb-order-total cb-product-row">
+          <div>Total</div>
+          <div class="cb-total-display">calculating...</div>
+        </div>
+      </div>
+    </section>
+    <script src="https://js.chargebee.com/v2/chargebee.js"></script>
+    <script src="/static/constants/countries.js"></script>
+    <script src="/static/checkout/cb-checkout.js"></script>
+  </body>
+</html>

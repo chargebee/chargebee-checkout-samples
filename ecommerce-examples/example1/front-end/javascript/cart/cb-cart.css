@@ -93,6 +93,7 @@
   width: 20vw;
   background: white;
   box-shadow: rgba(0, 0, 0, 0.35) 15px 5px 15px;
+  flex-wrap: wrap;
 }
 
 .cb-cart-total-price div:first-child {
@@ -156,8 +157,6 @@
 
 .cb-continue-shopping {
   padding: 10px 20px;
-  background-color: var(--cb-cta-bg);
-  color: var(--cb-cta-text);
   border-radius: var(--cb-border-radius);
   text-decoration: none;
   display: block;
@@ -166,4 +165,14 @@
   width: 80%;
   margin: 30px auto;
   cursor: pointer;
+  background-color: #e5f3fa;
+  border-color: #8ccce6;
+  color: #1d485f;
+  border: 1px solid #0229383d;
+}
+
+.cb-checkout-button {
+  border: 1px;
+  width: 100%;
+  margin-top: 20px;
 }
