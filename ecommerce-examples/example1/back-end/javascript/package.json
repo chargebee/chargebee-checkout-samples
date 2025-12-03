@@ -12,7 +12,7 @@
   "dependencies": {
     "chargebee": "^2.6.0",
     "cors": "^2.8.4",
-    "express": "^4.16.2",
+    "express": "^4.22.0",
     "node-fetch": "^2.6.11"
   }
 }
